@@ -1,0 +1,19 @@
+{
+    "name": "payavel/subscription",
+    "description": "Simple subscription management solution for Laravel.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robert Kujawa",
+            "email": "robert.kujawa@proton.me"
+        }
+    ],
+    "require-dev": {
+        "orchestra/testbench": "^6.0|^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Payavel\\Subscription\\": "src/"
+        }
+    }
+}
