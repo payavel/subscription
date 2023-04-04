@@ -4,7 +4,7 @@ namespace Payavel\Checkout;
 
 use Illuminate\Support\ServiceProvider;
 
-class PaymentServiceProvider extends ServiceProvider
+class SubscriptionServiceProvider extends ServiceProvider
 {
     public function boot()
     {
