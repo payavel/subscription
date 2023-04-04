@@ -15,5 +15,12 @@
         "psr-4": {
             "Payavel\\Subscription\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Payavel\\Subscription\\SubscriptionServiceProvider"
+            ]
+        }
     }
 }
