@@ -39,7 +39,7 @@ class CreateBaseSubscriptionTables extends Migration
             $table->timestamps();
 
             $table->foreign('subscription_product_id')->references('id')->on('subscription_products')->onDelete('cascade');
-            $table->foreign('renew_period_id')->references('id')->on('subscription_periods')->onDelete('delete');
+            $table->foreign('renew_period_id')->references('id')->on('subscription_periods')->onDelete('cascade');
             $table->foreign('grace_period_id')->references('id')->on('subscription_periods')->onDelete('set null');
             $table->foreign('trial_period_id')->references('id')->on('subscription_periods')->onDelete('set null');
         });
