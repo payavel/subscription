@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel\Checkout;
+namespace Payavel\Subscription;
 
 use Illuminate\Support\ServiceProvider;
 
