@@ -22,5 +22,8 @@
                 "Payavel\\Subscription\\SubscriptionServiceProvider"
             ]
         }
+    },
+    "require": {
+        "payavel/checkout": "^1.0"
     }
 }
