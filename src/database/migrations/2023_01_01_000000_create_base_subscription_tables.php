@@ -14,28 +14,28 @@ class CreateBaseSubscriptionTables extends Migration
     public function up()
     {
         Schema::create('subscription_products', function (Blueprint $table) {
-            $table->increments('id');
+            $table->mediumIncrements('id');
             $table->string('name');
             $table->string('description');
             $table->timestamps();
         });
 
         Schema::create('subscription_periods', function (Blueprint $table) {
-            $table->increments('id');
+            $table->smallIncrements('id');
             $table->unsignedInteger('frequency');
             $table->string('unit');
             $table->timestamps();
         });
 
         Schema::create('subscription_plans', function (Blueprint $table) {
-            $table->smallIncrements('id');
-            $table->unsignedInteger('subscription_product_id');
+            $table->increments('id');
+            $table->unsignedMediumInteger('subscription_product_id');
             $table->unsignedInteger('price');
             $table->char('currency', 3)->default('USD');
-            $table->unsignedInteger('renew_period_id');
-            $table->unsignedInteger('grace_period_id')->nullable();
-            $table->unsignedInteger('trial_period_id')->nullable();
-            $table->unsignedInteger('status');
+            $table->unsignedSmallInteger('renew_period_id');
+            $table->unsignedSmallInteger('grace_period_id')->nullable();
+            $table->unsignedSmallInteger('trial_period_id')->nullable();
+            $table->unsignedSmallInteger('status');
             $table->timestamps();
 
             $table->foreign('subscription_product_id')->references('id')->on('subscription_products')->onDelete('cascade');
@@ -44,8 +44,8 @@ class CreateBaseSubscriptionTables extends Migration
             $table->foreign('trial_period_id')->references('id')->on('subscription_periods')->onDelete('set null');
         });
 
-        Schema::create('subscriptions', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('subscription_agreements', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedInteger('subscription_plan_id');
             $table->unsignedBigInteger('subscribable_id');
             $table->string('subscribable_type');
@@ -53,7 +53,7 @@ class CreateBaseSubscriptionTables extends Migration
             $table->unsignedBigInteger('backup_payment_method_id')->nullable();
             $table->date('start_date');
             $table->date('next_billing_date');
-            $table->string('subscription_status');
+            $table->unsignedSmallInteger('status');
             $table->timestamps();
 
             $table->foreign('subscription_plan_id')->references('id')->on('subscription_plans')->onDelete('cascade');
@@ -69,7 +69,7 @@ class CreateBaseSubscriptionTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('subscription_agreements');
         Schema::dropIfExists('subscription_plans');
         Schema::dropIfExists('subscription_periods');
         Schema::dropIfExists('subscription_products');
