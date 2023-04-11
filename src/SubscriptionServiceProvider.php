@@ -16,7 +16,7 @@ class SubscriptionServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/stubs/migration-base.stub' => database_path('migrations/2023_01_01_000000_create_base_subscription_tables.php'),
-        ], 'migrations');
+        ], 'payavel-migrations');
     }
 
     public function register()
