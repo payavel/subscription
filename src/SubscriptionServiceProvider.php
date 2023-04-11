@@ -8,6 +8,10 @@ class SubscriptionServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->publishes([
+            __DIR__ . '/stubs/config-publish.stub' => config_path('subscription.php'),
+        ], 'payavel-config');
+
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
         $this->publishes([
@@ -17,6 +21,9 @@ class SubscriptionServiceProvider extends ServiceProvider
 
     public function register()
     {
-        // Register something...
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/subscription.php',
+            'subscription'
+        );
     }
 }
