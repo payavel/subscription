@@ -83,7 +83,7 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
      * @param \Payavel\Subscription\Models\Subscription $subscription
      * @return \Payavel\Subscription\SubscriptionResponse
      */
-    public function activateAgreement(Subscription $subscription)
+    public function reactivateAgreement(Subscription $subscription)
     {
 
     }
