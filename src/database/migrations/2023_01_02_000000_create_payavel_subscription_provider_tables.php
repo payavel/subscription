@@ -17,9 +17,9 @@ class CreatePayavelSubscriptionProviderTables extends Migration
             return;
         }
 
-        $usingDatabaseDriver = config('subscription.defaults.driver') === 'database';
-
-        // TODO: $usingDatabaseDriver? -> insert payavel subscription provider here.
+        if (config('subscription.defaults.driver') === 'database') {
+            // TODO: Insert payavel subscription provider here.
+        }
     
         Schema::create('subscription_periods', function (Blueprint $table) {
             $table->smallIncrements('id');
@@ -45,9 +45,8 @@ class CreatePayavelSubscriptionProviderTables extends Migration
             $table->foreign('trial_period_id')->references('id')->on('subscription_periods')->onDelete('set null');
         });
 
-        Schema::create('subscription_agreements', function (Blueprint $table) use ($usingDatabaseDriver) {
+        Schema::create('subscription_agreements', function (Blueprint $table) {
             $table->uuid('reference');
-            $table->string('provider_id');
             $table->unsignedInteger('subscription_plan_id');
             $table->unsignedBigInteger('primary_payment_method_id')->nullable();
             $table->unsignedBigInteger('backup_payment_method_id')->nullable();
@@ -56,9 +55,6 @@ class CreatePayavelSubscriptionProviderTables extends Migration
             $table->unsignedSmallInteger('status');
             $table->timestamps();
 
-            if ($usingDatabaseDriver) {
-                $table->foreign('provider_id')->references('id')->on('subscription_providers')->onDelete('cascade');
-            }
             $table->foreign('subscription_plan_id')->references('id')->on('subscription_plans')->onDelete('cascade');
             $table->foreign('primary_payment_method_id')->references('id')->on('payment_methods')->onDelete('set null');
             $table->foreign('backup_payment_method_id')->references('id')->on('payment_methods')->onDelete('set null');
