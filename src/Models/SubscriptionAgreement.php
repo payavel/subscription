@@ -14,17 +14,7 @@ class SubscriptionAgreement extends Model
     protected $guarded = ['id'];
 
     /**
-     * Get the Provider the Agreement method belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function provider()
-    {
-        return $this->belongsTo(SubscriptionProvider::class);
-    }
-
-    /**
-     * Get the Provider the Agreement method belongs to.
+     * Retrieve the subscription agreement's plan.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

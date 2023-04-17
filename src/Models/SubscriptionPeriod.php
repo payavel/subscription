@@ -12,14 +12,4 @@ class SubscriptionPeriod extends Model
      * @var string[]|bool
      */
     protected $guarded = ['id'];
-
-    /**
-     * Get the Plans' Period
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function plans()
-    {
-        return $this->hasMany(SubscriptionPlan::class);
-    }
 }

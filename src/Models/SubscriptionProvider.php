@@ -14,7 +14,7 @@ class SubscriptionProvider extends Model
     protected $guarded = ['id'];
 
     /**
-     * Get the Subscriptions' Provider
+     * Get the provider related subscriptions.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

@@ -14,7 +14,7 @@ class SubscriptionProduct extends Model
     protected $guarded = ['id'];
 
     /**
-     * Get the Subscriptions' Product
+     * Get the product's subscriptions
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -24,12 +24,12 @@ class SubscriptionProduct extends Model
     }
 
     /**
-     * Get the Plans' Product
+     * Get the product's related plans
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function plans()
     {
-        return $this->hasMany(config('subscription.models.' . SubscriptionPlan::class, SubscriptionPlan::class));
+        return $this->hasMany(SubscriptionPlan::class);
     }
 }
