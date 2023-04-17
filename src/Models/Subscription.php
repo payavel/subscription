@@ -14,7 +14,7 @@ class Subscription extends Model
     protected $guarded = ['id'];
 
     /**
-     * Get the Provider the Subscription method belongs to.
+     * Get the provider this subscription belongs to..
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -24,7 +24,7 @@ class Subscription extends Model
     }
 
     /**
-     * Get the Product the Subscription method belongs to.
+     * Get the product this subscription relates to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

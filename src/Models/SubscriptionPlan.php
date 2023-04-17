@@ -14,17 +14,17 @@ class SubscriptionPlan extends Model
     protected $guarded = ['id'];
 
     /**
-     * Get the Product the Plan method belongs to.
+     * Get the product this plan relates to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product()
     {
-        return $this->belongsTo(SubscriptionProduct::class);
+        return $this->belongsTo(config('subscription.models.' . SubscriptionProduct::class, SubscriptionProduct::class));
     }
 
     /**
-     * Get the Renew Period the Plan method belongs to.
+     * Get the plan's renew period.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -34,7 +34,7 @@ class SubscriptionPlan extends Model
     }
 
     /**
-     * Get the Grace Period the Plan method belongs to.
+     * Get the plan's grace period.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -44,7 +44,7 @@ class SubscriptionPlan extends Model
     }
 
     /**
-     * Get the Trial Period the Plan method belongs to.
+     * Get the plan's trial period.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -54,7 +54,7 @@ class SubscriptionPlan extends Model
     }
 
     /**
-     * Get the Plans' Agreements
+     * Get the plan's subscription agreements.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
