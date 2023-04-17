@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SubscriptionProvider extends Model
+class SubscriptionPeriod extends Model
 {
     /**
      * The attributes that aren't mass assignable.
@@ -14,12 +14,12 @@ class SubscriptionProvider extends Model
     protected $guarded = ['id'];
 
     /**
-     * Get the Subscriptions' Provider
+     * Get the Plans' Period
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subscriptions()
+    public function plans()
     {
-        return $this->hasMany(Subscription::class);
+        return $this->hasMany(SubscriptionPlan::class);
     }
 }

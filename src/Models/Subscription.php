@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,7 +20,7 @@ class Subscription extends Model
      */
     public function provider()
     {
-        return $this->belongsTo(SubscriptionProvider::class);
+        return $this->belongsTo(config('subscription.models.' . SubscriptionProvider::class, SubscriptionProvider::class));
     }
 
     /**
@@ -30,6 +30,6 @@ class Subscription extends Model
      */
     public function product()
     {
-        return $this->belongsTo(SubscriptionProduct::class);
+        return $this->belongsTo(config('subscription.models.' . SubscriptionProduct::class, SubscriptionProduct::class));
     }
 }

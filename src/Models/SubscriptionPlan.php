@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,7 +30,7 @@ class SubscriptionPlan extends Model
      */
     public function renewPeriod()
     {
-        return $this->belongsTo(SubscriptionPeriod::class, 'renew_period_id');
+        return $this->belongsTo(SubscriptionPeriod::class);
     }
 
     /**
@@ -40,7 +40,7 @@ class SubscriptionPlan extends Model
      */
     public function gracePeriod()
     {
-        return $this->belongsTo(SubscriptionPeriod::class, 'grace_period_id');
+        return $this->belongsTo(SubscriptionPeriod::class);
     }
 
     /**
@@ -50,7 +50,7 @@ class SubscriptionPlan extends Model
      */
     public function trialPeriod()
     {
-        return $this->belongsTo(SubscriptionPeriod::class, 'trial_period_id');
+        return $this->belongsTo(SubscriptionPeriod::class);
     }
 
     /**
