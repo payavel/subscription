@@ -19,7 +19,7 @@ trait SubscriptionResponses
     }
 
     /**
-     * Maps details from the ___ response to the expected format.
+     * Maps details from the listAgreements() response to the expected format.
      *
      * @return array|mixed
      */
@@ -69,11 +69,11 @@ trait SubscriptionResponses
     }
 
     /**
-     * Maps details from the reactivateAgreement() response to the expected format.
+     * Maps details from the activateAgreement() response to the expected format.
      *
      * @return array|mixed
      */
-    public function reactivateAgreementResponse()
+    public function activateAgreementResponse()
     {
         return $this->genericResponse(__FUNCTION__);
     }

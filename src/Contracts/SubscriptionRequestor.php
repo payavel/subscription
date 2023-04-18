@@ -59,10 +59,10 @@ interface SubscriptionRequestor
     public function cancelAgreement(Subscription $subscription);
 
     /**
-     * Reactivate a previously canceled subscription agreement.
+     * Activate a previously canceled subscription agreement.
      *
      * @param \Payavel\Subscription\Models\Subscription $subscription
      * @return \Payavel\Subscription\SubscriptionResponse
      */
-    public function reactivateAgreement(Subscription $subscription);
+    public function activateAgreement(Subscription $subscription);
 }
