@@ -1,23 +1,24 @@
 <?php
 
-namespace Payavel\Subscription;
+namespace Payavel\Subscription\Traits;
 
-use Payavel\Subscription\Contracts\Subscribable;
-use Payavel\Subscription\Contracts\SubscriptionRequestor;
+use Payavel\Checkout\Traits\ThrowsRuntimeException;
 use Payavel\Subscription\Models\Subscription;
 use Payavel\Subscription\Models\SubscriptionProduct;
 
-class SubscriptionGateway extends SubscriptionService implements SubscriptionRequestor
+trait SubscriptionRequests
 {
+    use ThrowsRuntimeException;
+
     /**
      * Retrieve the product's active subscription plans.
      *
      * @param \Payavel\Subscription\Models\SubscriptionProduct $product
      * @return \Payavel\Subscription\SubscriptionResponse
      */
-    public function plans(SubscriptionProduct $subscriptionProduct)
+    public function plans(SubscriptionProduct $product)
     {
-        
+        $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
@@ -28,7 +29,7 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
      */
     public function listAgreements(Subscribable $subscriber)
     {
-
+        $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
@@ -39,7 +40,7 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
      */
     public function getAgreement(Subscription $subscription)
     {
-
+        $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
@@ -51,7 +52,7 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
      */
     public function createAgreement(Subscribable $subscriber, $data)
     {
-
+        $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
@@ -63,7 +64,7 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
      */
     public function updateAgreement(Subscription $subscription, $data)
     {
-
+        $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
@@ -74,7 +75,7 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
      */
     public function cancelAgreement(Subscription $subscription)
     {
-
+        $this->throwRuntimeException(__FUNCTION__);
     }
 
     /**
@@ -85,6 +86,6 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
      */
     public function activateAgreement(Subscription $subscription)
     {
-
+        $this->throwRuntimeException(__FUNCTION__);
     }
 }
