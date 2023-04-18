@@ -3,6 +3,7 @@
 namespace Payavel\Subscription\Traits;
 
 use Payavel\Checkout\Traits\ThrowsRuntimeException;
+use Payavel\Subscription\Contracts\Subscribable;
 use Payavel\Subscription\Models\Subscription;
 use Payavel\Subscription\Models\SubscriptionProduct;
 
