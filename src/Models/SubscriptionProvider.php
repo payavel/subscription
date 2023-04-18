@@ -3,6 +3,7 @@
 namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Payavel\Subscription\Database\Factories\SubscriptionProviderFactory;
 
 class SubscriptionProvider extends Model
 {
@@ -21,5 +22,15 @@ class SubscriptionProvider extends Model
     public function subscriptions()
     {
         return $this->hasMany(config('subscription.models.' . Subscription::class, Subscription::class));
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return SubscriptionProviderFactory::new();
     }
 }
