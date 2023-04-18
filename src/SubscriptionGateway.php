@@ -32,7 +32,7 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
     }
 
     /**
-     * Undocumented function
+     * Get the subscription's agreement details.
      *
      * @param \Payavel\Subscription\Models\Subscription $subscription
      * @return \Payavel\Subscription\SubscriptionResponse
