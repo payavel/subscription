@@ -19,7 +19,7 @@ abstract class SubscriptionServiceDriver
      */
     public function getDefaultProvider()
     {
-        return config('payment.defaults.provider');
+        return config('subscription.defaults.provider');
     }
 
     /**
