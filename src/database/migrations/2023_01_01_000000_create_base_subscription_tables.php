@@ -32,20 +32,28 @@ class CreateBaseSubscriptionTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('subscriptions', function (Blueprint $table) use ($usingDatabaseDriver) {
+        Schema::create('subscribers', function (Blueprint $table) use ($usingDatabaseDriver) {
             $table->bigIncrements('id');
-            $table->unsignedMediumInteger('subscription_product_id');
+            $table->unsignedBigInteger('subscribable_id');
+            $table->string('subscribable_type');
             $table->string('provider_id');
-            $table->string('reference')->index();
-            $table->unsignedBigInteger('subscriber_id');
-            $table->string('subscriber_type');
-            $table->unsignedSmallInteger('status');
-            $table->timestamps();
+            $table->string('token')->index();
 
-            $table->foreign('subscription_product_id')->references('id')->on('subscription_products')->onDelete('cascade');
             if ($usingDatabaseDriver) {
                 $table->foreign('provider_id')->references('id')->on('subscription_providers')->onDelete('set null');
             }
+        });
+
+        Schema::create('subscriptions', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('subscriber_id');
+            $table->string('reference')->index();
+            $table->unsignedMediumInteger('subscription_product_id');
+            $table->unsignedSmallInteger('status');
+            $table->timestamps();
+
+            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('set null');
+            $table->foreign('subscription_product_id')->references('id')->on('subscription_products')->onDelete('cascade');
         });
     }
 

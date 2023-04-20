@@ -61,6 +61,7 @@ return [
     */
     // 'models' => [
     //     \Payavel\Subscription\Models\SubscriptionProduct::class => \App\Models\Subscription\SubscriptionProduct::class,
+    //     \Payavel\Subscription\Models\Subscriber::class => \App\Models\Subscription\Subscriber::class,
     //     \Payavel\Subscription\Models\Subscription::class => \App\Models\Subscription\Subscription::class,
     // ],
 
