@@ -150,7 +150,7 @@ abstract class SubscriptionResponse implements SubscriptionResponder
      */
     public function getMessage()
     {
-        return SubscriptionStatus::getMessage($this->getStatus());
+        return SubscriptionStatus::getMessage($this->getStatusCode());
     }
 
     /**
