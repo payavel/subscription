@@ -18,7 +18,7 @@ abstract class SubscriptionResponse implements SubscriptionResponder
      * @var array
      */
     protected $successStatuses = [
-        // TODO: Define subscription statuses.
+        SubscriptionStatus::REQUEST_SUCCESS
     ];
 
     /**
@@ -140,7 +140,7 @@ abstract class SubscriptionResponse implements SubscriptionResponder
      */
     public function getStatus()
     {
-        // TODO: Define subscription statuses.
+        SubscriptionStatus::get($this->getStatusCode());
     }
 
     /**
@@ -150,7 +150,7 @@ abstract class SubscriptionResponse implements SubscriptionResponder
      */
     public function getMessage()
     {
-        // TODO: Define subscription statuses.
+        SubscriptionStatus::getMessage($this->getStatus());
     }
 
     /**
