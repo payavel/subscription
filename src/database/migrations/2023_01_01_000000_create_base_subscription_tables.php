@@ -46,7 +46,7 @@ class CreateBaseSubscriptionTables extends Migration
 
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('subscriber_id');
+            $table->unsignedBigInteger('subscriber_id')->nullable();
             $table->string('reference')->index();
             $table->unsignedMediumInteger('subscription_product_id');
             $table->unsignedSmallInteger('status');
