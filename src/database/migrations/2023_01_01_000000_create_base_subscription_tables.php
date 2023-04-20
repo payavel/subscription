@@ -65,6 +65,7 @@ class CreateBaseSubscriptionTables extends Migration
     public function down()
     {
         Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('subscribers');
         Schema::dropIfExists('subscription_products');
         Schema::dropIfExists('subscription_providers');
     }
