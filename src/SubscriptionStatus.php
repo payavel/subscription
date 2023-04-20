@@ -51,13 +51,13 @@ class SubscriptionStatus
         self::REQUEST_ERROR => 'The request resulted in error.',
 
         self::ACTIVE_AUTO_RENEW_ON => 'The subscription is active & will auto renew.',
-        self::ACTIVE_AUTO_RENEW_OFF => 'The subscription is active & will not auto renewal.',
+        self::ACTIVE_AUTO_RENEW_OFF => 'The subscription is active & will not auto renew.',
         self::ACTIVE_NO_PAYMENT_METHOD => 'The subscription is active & is set to auto renew but doesn\'t have a payment method.',
         self::PAUSED => 'The subscription was paused.',
-        self::EXPIRED => 'The subscription has reached it\'s end term and has expired.',
+        self::EXPIRED => 'The subscription has reached it\'s end term & has expired.',
         self::SUSPENDED => 'The subscription was suspended due to non payment & is currently in grace period.',
         self::CANCELED_SUBSCRIBER => 'The subscription was canceled by the subscriber.',
-        self::CANCELED_NO_PAYMENT => 'The subscription was canceled due to non payment & has reached the grace period.',
+        self::CANCELED_NO_PAYMENT => 'The subscription was canceled due to non payment & has reached the end of it\'s grace period.',
     ];
 
     /**
