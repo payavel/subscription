@@ -59,4 +59,26 @@ class SubscriptionStatus
         self::CANCELED_SUBSCRIBER => 'The subscription was canceled by the subscriber.',
         self::CANCELED_NO_PAYMENT => 'The subscription was canceled due to non payment & has reached the grace period.',
     ];
+
+    /**
+     * Get the definition of the provided code.
+     *
+     * @param int $status
+     * @return string|null
+     */
+    public static function get($status)
+    {
+        return self::$codes[$status] ?? null;
+    }
+
+    /**
+     * Get the description of the provided code.
+     *
+     * @param int $status
+     * @return string|null
+     */
+    public static function getMessage($status)
+    {
+        return self::$messages[$status] ?? null;
+    }
 }
