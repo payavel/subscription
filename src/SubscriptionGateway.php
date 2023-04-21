@@ -22,14 +22,14 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
     }
 
     /**
-     * Get all of the subscriber's active agreements.
+     * Get all of the subscribable's active agreements.
      *
-     * @param \Payavel\Subscription\Contracts\Subscribable $subscriber
+     * @param \Payavel\Subscription\Contracts\Subscribable $subscribable
      * @return \Payavel\Subscription\SubscriptionResponse
      */
-    public function listAgreements(Subscribable $subscriber)
+    public function listAgreements(Subscribable $subscribable)
     {
-        return tap($this->gateway->listAgreements($subscriber))->configure(__FUNCTION__, $this->provider);
+        return tap($this->gateway->listAgreements($subscribable))->configure(__FUNCTION__, $this->provider);
     }
 
     /**
@@ -44,15 +44,15 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
     }
 
     /**
-     * Create a new agreement for the subscriber.
+     * Create a new agreement for the subscribable.
      *
-     * @param \Payavel\Subscription\Contracts\Subscribable $subscriber
+     * @param \Payavel\Subscription\Contracts\Subscribable $subscribable
      * @param array|mixed $data
      * @return \Payavel\Subscription\SubscriptionResponse
      */
-    public function createAgreement(Subscribable $subscriber, $data)
+    public function createAgreement(Subscribable $subscribable, $data)
     {
-        return tap($this->gateway->createAgreement($subscriber, $data))->configure(__FUNCTION__, $this->provider);
+        return tap($this->gateway->createAgreement($subscribable, $data))->configure(__FUNCTION__, $this->provider);
     }
 
     /**

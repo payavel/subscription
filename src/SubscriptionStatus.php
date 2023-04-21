@@ -15,7 +15,7 @@ class SubscriptionStatus
     const PAUSED = 23;
     const EXPIRED = 24;
     const SUSPENDED = 30;
-    const CANCELED_SUBSCRIBER = 31;
+    const CANCELED_CUSTOMER = 31;
     const CANCELED_NO_PAYMENT = 32;
 
     /**
@@ -35,7 +35,7 @@ class SubscriptionStatus
         self::PAUSED => 'Paused',
         self::EXPIRED => 'Expired',
         self::SUSPENDED => 'Suspended',
-        self::CANCELED_SUBSCRIBER => 'Canceled by subscriber',
+        self::CANCELED_CUSTOMER => 'Customer canceled',
         self::CANCELED_NO_PAYMENT => 'Canceled due to non payment',
     ];
 
@@ -56,7 +56,7 @@ class SubscriptionStatus
         self::PAUSED => 'The subscription was paused.',
         self::EXPIRED => 'The subscription has reached it\'s end term & has expired.',
         self::SUSPENDED => 'The subscription was suspended due to non payment & is currently in grace period.',
-        self::CANCELED_SUBSCRIBER => 'The subscription was canceled by the subscriber.',
+        self::CANCELED_CUSTOMER => 'The subscription was canceled by the customer.',
         self::CANCELED_NO_PAYMENT => 'The subscription was canceled due to non payment & has reached the end of it\'s grace period.',
     ];
 
