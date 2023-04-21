@@ -4,7 +4,7 @@ namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Subscriber extends Model
+class SubscriptionCustomer extends Model
 {
     /**
      * The attributes that aren't mass assignable.
@@ -21,7 +21,7 @@ class Subscriber extends Model
     protected $hidden = ['token'];
 
     /**
-     * Get the provider this subscriber belongs to.
+     * Get the provider this subscribable belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -31,7 +31,7 @@ class Subscriber extends Model
     }
 
     /**
-     * Get the parent subscribable model.
+     * Get the subscribable model entity.
      * 
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
@@ -41,7 +41,7 @@ class Subscriber extends Model
     }
 
     /**
-     * Get the subscriber's subscriptions.
+     * Get the customer's subscriptions.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

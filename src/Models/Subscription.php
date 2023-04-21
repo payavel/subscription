@@ -14,13 +14,13 @@ class Subscription extends Model
     protected $guarded = ['id'];
 
     /**
-     * Get this subscription's subscriber.
+     * Get this subscription's customer.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function subscriber()
+    public function customer()
     {
-        return $this->belongsTo(config('subscription.models.' . Subscriber::class, Subscriber::class));
+        return $this->belongsTo(config('subscription.models.' . SubscriptionCustomer::class, SubscriptionCustomer::class));
     }
 
     /**

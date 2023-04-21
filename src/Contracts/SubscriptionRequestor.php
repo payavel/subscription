@@ -17,12 +17,12 @@ interface SubscriptionRequestor
     public function plans(SubscriptionProduct $product);
 
     /**
-     * Get all of the subscriber's active agreements.
+     * Get all of the subscribable's active agreements.
      *
-     * @param \Payavel\Subscription\Contracts\Subscribable $subscriber
+     * @param \Payavel\Subscription\Contracts\Subscribable $subscribable
      * @return \Payavel\Subscription\SubscriptionResponse
      */
-    public function listAgreements(Subscribable $subscriber);
+    public function listAgreements(Subscribable $subscribable);
 
     /**
      * Get the subscription's agreement details.
@@ -33,13 +33,13 @@ interface SubscriptionRequestor
     public function getAgreement(Subscription $subscription);
 
     /**
-     * Create a new agreement for the subscriber.
+     * Create a new agreement for the subscribable.
      *
-     * @param \Payavel\Subscription\Contracts\Subscribable $subscriber
+     * @param \Payavel\Subscription\Contracts\Subscribable $subscribable
      * @param array|mixed $data
      * @return \Payavel\Subscription\SubscriptionResponse
      */
-    public function createAgreement(Subscribable $subscriber, $data);
+    public function createAgreement(Subscribable $subscribable, $data);
 
     /**
      * Update an existing subscription agreement.
