@@ -38,6 +38,7 @@ class CreateBaseSubscriptionTables extends Migration
             $table->string('subscribable_type');
             $table->string('provider_id');
             $table->string('token')->index();
+            $table->timestamps();
 
             if ($usingDatabaseDriver) {
                 $table->foreign('provider_id')->references('id')->on('subscription_providers')->onDelete('set null');
