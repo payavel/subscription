@@ -1,6 +1,6 @@
 <?php
 
-namespace Payavel\Checkout\Traits;
+namespace Payavel\Subscription\Traits;
 
 trait Questionable
 {
