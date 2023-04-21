@@ -32,7 +32,7 @@ class CreateBaseSubscriptionTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('subscribers', function (Blueprint $table) use ($usingDatabaseDriver) {
+        Schema::create('subscription_customers', function (Blueprint $table) use ($usingDatabaseDriver) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('subscribable_id');
             $table->string('subscribable_type');
@@ -47,13 +47,13 @@ class CreateBaseSubscriptionTables extends Migration
 
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('subscriber_id')->nullable();
+            $table->unsignedBigInteger('customer_id')->nullable();
             $table->string('reference')->index();
             $table->unsignedMediumInteger('subscription_product_id');
             $table->unsignedSmallInteger('status');
             $table->timestamps();
 
-            $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('set null');
+            $table->foreign('customer_id')->references('id')->on('subscription_customers')->onDelete('set null');
             $table->foreign('subscription_product_id')->references('id')->on('subscription_products')->onDelete('cascade');
         });
     }
@@ -66,7 +66,7 @@ class CreateBaseSubscriptionTables extends Migration
     public function down()
     {
         Schema::dropIfExists('subscriptions');
-        Schema::dropIfExists('subscribers');
+        Schema::dropIfExists('subscription_customers');
         Schema::dropIfExists('subscription_products');
         Schema::dropIfExists('subscription_providers');
     }
