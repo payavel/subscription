@@ -1,0 +1,100 @@
+<?php
+
+namespace App\Services\Subscription;
+
+use Payavel\Subscription\Contracts\Subscribable;
+use Payavel\Subscription\Models\Subscription;
+use Payavel\Subscription\Models\SubscriptionProduct;
+use Payavel\Subscription\SubscriptionRequest;
+
+class {{ name }}SubscriptionRequest extends SubscriptionRequest
+{
+    /**
+     * Set up the request.
+     *
+     * @return void
+     */
+    protected function setUp()
+    {
+        //
+    }
+
+    /**
+     * Retrieve the product's active subscription plans.
+     *
+     * @param \Payavel\Subscription\Models\SubscriptionProduct $product
+     * @return \Payavel\Subscription\SubscriptionResponse
+     */
+    public function plans(SubscriptionProduct $product)
+    {
+        //
+    }
+
+    /**
+     * Get all of the subscribable's active agreements.
+     *
+     * @param \Payavel\Subscription\Contracts\Subscribable $subscribable
+     * @return \Payavel\Subscription\SubscriptionResponse
+     */
+    public function listAgreements(Subscribable $subscribable)
+    {
+        //
+    }
+
+    /**
+     * Get the subscription's agreement details.
+     *
+     * @param \Payavel\Subscription\Models\Subscription $subscription
+     * @return \Payavel\Subscription\SubscriptionResponse
+     */
+    public function getAgreement(Subscription $subscription)
+    {
+        //
+    }
+
+    /**
+     * Create a new agreement for the subscribable.
+     *
+     * @param \Payavel\Subscription\Contracts\Subscribable $subscribable
+     * @param array|mixed $data
+     * @return \Payavel\Subscription\SubscriptionResponse
+     */
+    public function createAgreement(Subscribable $subscribable, $data)
+    {
+        //
+    }
+
+    /**
+     * Update an existing subscription agreement.
+     *
+     * @param \Payavel\Subscription\Models\Subscription $subscription
+     * @param array|mixed $data
+     * @return \Payavel\Subscription\SubscriptionResponse
+     */
+    public function updateAgreement(Subscription $subscription, $data)
+    {
+        //
+    }
+
+    /**
+     * Cancel a subscription agreement.
+     *
+     * @param \Payavel\Subscription\Models\Subscription $subscription
+     * @return \Payavel\Subscription\SubscriptionResponse
+     */
+    public function cancelAgreement(Subscription $subscription)
+    {
+        //
+    }
+
+    /**
+     * Activate a previously canceled subscription agreement.
+     *
+     * @param \Payavel\Subscription\Models\Subscription $subscription
+     * @return \Payavel\Subscription\SubscriptionResponse
+     */
+    public function activateAgreement(Subscription $subscription)
+    {
+        //
+    }
+}
