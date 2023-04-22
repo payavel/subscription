@@ -3,20 +3,21 @@
 namespace Payavel\Subscription;
 
 use Illuminate\Support\ServiceProvider;
+use Payavel\Subscription\Console\Commands\MakeProvider;
 
 class SubscriptionServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/stubs/config-publish.stub' => config_path('subscription.php'),
-        ], 'payavel-config');
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
+        
+        $this->registerPublishableAssets();
 
-        $this->publishes([
-            __DIR__ . '/database/migrations/2023_01_01_000000_create_base_subscription_tables.php' => database_path('migrations/2023_01_01_000000_create_base_subscription_tables.php'),
-        ], 'payavel-migrations');
+        $this->registerCommands();
 
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->registerMigrations();
     }
 
     public function register()
@@ -29,5 +30,28 @@ class SubscriptionServiceProvider extends ServiceProvider
             __DIR__ . '/config/subscription.php',
             'subscription'
         );
+    }
+
+    protected function registerPublishableAssets()
+    {
+        $this->publishes([
+            __DIR__ . '/stubs/config-publish.stub' => config_path('subscription.php'),
+        ], 'payavel-config');
+
+        $this->publishes([
+            __DIR__ . '/database/migrations/2023_01_01_000000_create_base_subscription_tables.php' => database_path('migrations/2023_01_01_000000_create_base_subscription_tables.php'),
+        ], 'payavel-migrations');
+    }
+
+    protected function registerCommands()
+    {
+        $this->commands([
+            MakeProvider::class,
+        ]);
+    }
+
+    protected function registerMigrations()
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
     }
 }
