@@ -37,12 +37,12 @@ class SubscriptionAgreementFactory extends Factory
     public function configure()
     {
         return $this->afterMaking(function (SubscriptionAgreement $subscriptionAgreement) {
-            if (is_null($subscriptionAgreement->subscription_plan_id)) {
+            if (is_null($subscriptionAgreement->plan_id)) {
                 $subscriptionPlan = SubscriptionPlan::inRandomOrder()->firstOr(function () {
                     return SubscriptionPlan::factory()->create();
                 });
 
-                $subscriptionAgreement->subscription_plan_id = $subscriptionPlan->id;
+                $subscriptionAgreement->plan_id = $subscriptionPlan->id;
             }
         });
     }
