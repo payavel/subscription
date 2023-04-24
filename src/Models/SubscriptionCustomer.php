@@ -58,6 +58,6 @@ class SubscriptionCustomer extends Model
      */
     public function subscriptions()
     {
-        return $this->hasMany(config('subscription.models.' . Subscription::class, Subscription::class));
+        return $this->hasMany(config('subscription.models.' . Subscription::class, Subscription::class), 'customer_id');
     }
 }
