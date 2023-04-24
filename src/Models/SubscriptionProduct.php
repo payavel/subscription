@@ -31,7 +31,7 @@ class SubscriptionProduct extends Model
      */
     public function subscriptions()
     {
-        return $this->hasMany(config('subscription.models.' . Subscription::class, Subscription::class));
+        return $this->hasMany(config('subscription.models.' . Subscription::class, Subscription::class), 'product_id');
     }
 
     /**
@@ -41,6 +41,6 @@ class SubscriptionProduct extends Model
      */
     public function plans()
     {
-        return $this->hasMany(SubscriptionPlan::class);
+        return $this->hasMany(SubscriptionPlan::class, 'product_id');
     }
 }
