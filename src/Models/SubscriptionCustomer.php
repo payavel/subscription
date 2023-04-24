@@ -3,6 +3,7 @@
 namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Payavel\Subscription\Database\Factories\SubscriptionCustomerFactory;
 
 class SubscriptionCustomer extends Model
 {
@@ -19,6 +20,16 @@ class SubscriptionCustomer extends Model
      * @var array
      */
     protected $hidden = ['token'];
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return SubscriptionCustomerFactory::new();
+    }
 
     /**
      * Get the provider this subscribable belongs to.

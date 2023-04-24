@@ -34,8 +34,8 @@ class CreateBaseSubscriptionTables extends Migration
 
         Schema::create('subscription_customers', function (Blueprint $table) use ($usingDatabaseDriver) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('subscribable_id');
-            $table->string('subscribable_type');
+            $table->unsignedBigInteger('subscribable_id')->nullable();
+            $table->string('subscribable_type')->nullable();
             $table->string('provider_id');
             $table->string('token')->index();
             $table->timestamps();
@@ -49,12 +49,12 @@ class CreateBaseSubscriptionTables extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->string('reference')->index();
-            $table->unsignedMediumInteger('subscription_product_id');
+            $table->unsignedMediumInteger('product_id');
             $table->unsignedSmallInteger('status');
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('subscription_customers')->onDelete('set null');
-            $table->foreign('subscription_product_id')->references('id')->on('subscription_products')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('subscription_products')->onDelete('cascade');
         });
     }
 
