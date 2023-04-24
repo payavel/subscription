@@ -23,8 +23,8 @@ class CreatePayavelSubscriptionProviderTables extends Migration
     
         Schema::create('subscription_periods', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->unsignedInteger('frequency');
             $table->string('unit');
+            $table->unsignedInteger('frequency');
             $table->timestamps();
         });
 
