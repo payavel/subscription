@@ -15,6 +15,16 @@ class Subscription extends Model
     protected $guarded = ['id'];
 
     /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return SubscriptionFactory::new();
+    }
+
+    /**
      * Get this subscription's customer.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -32,15 +42,5 @@ class Subscription extends Model
     public function product()
     {
         return $this->belongsTo(config('subscription.models.' . SubscriptionProduct::class, SubscriptionProduct::class));
-    }
-
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return SubscriptionFactory::new();
     }
 }

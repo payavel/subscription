@@ -15,6 +15,16 @@ class SubscriptionProduct extends Model
     protected $guarded = ['id'];
 
     /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return SubscriptionProductFactory::new();
+    }
+
+    /**
      * Get the product's subscriptions
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -32,15 +42,5 @@ class SubscriptionProduct extends Model
     public function plans()
     {
         return $this->hasMany(SubscriptionPlan::class);
-    }
-
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return SubscriptionProductFactory::new();
     }
 }
