@@ -71,6 +71,6 @@ class SubscriptionPlan extends Model
      */
     public function agreements()
     {
-        return $this->hasMany(SubscriptionAgreement::class);
+        return $this->hasMany(SubscriptionAgreement::class, 'plan_id');
     }
 }
