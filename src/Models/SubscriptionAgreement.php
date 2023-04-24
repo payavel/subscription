@@ -3,6 +3,7 @@
 namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Payavel\Checkout\Models\PaymentMethod;
 use Payavel\Subscription\Database\Factories\SubscriptionAgreementFactory;
 
 class SubscriptionAgreement extends Model
@@ -42,5 +43,25 @@ class SubscriptionAgreement extends Model
     public function plan()
     {
         return $this->belongsTo(SubscriptionPlan::class);
+    }
+
+    /**
+     * Get the agreement's primary payment method.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function primaryPaymentMethod()
+    {
+        return $this->belongsTo(config('payment.models.' . PaymentMethod::class, PaymentMethod::class));
+    }
+
+    /**
+     * Get the agreement's backup payment method.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function backupPaymentMethod()
+    {
+        return $this->belongsTo(config('payment.models.' . PaymentMethod::class, PaymentMethod::class));
     }
 }
