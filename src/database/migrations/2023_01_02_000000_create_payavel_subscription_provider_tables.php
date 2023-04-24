@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Payavel\Subscription\Models\SubscriptionProvider;
 
 class CreatePayavelSubscriptionProviderTables extends Migration
 {
@@ -18,7 +19,12 @@ class CreatePayavelSubscriptionProviderTables extends Migration
         }
 
         if (config('subscription.defaults.driver') === 'database') {
-            // TODO: Insert payavel subscription provider here.
+            SubscriptionProvider::create([
+                'id' => 'payavel',
+                'name' => 'Payavel',
+                'request_class' => Payavel\Gateway\PayavelSubscriptionRequest::class,
+                'response_class' => Payavel\Gateway\PayavelSubscriptionResponse::class,
+            ]);
         }
     
         Schema::create('subscription_periods', function (Blueprint $table) {
