@@ -4,7 +4,9 @@ namespace Payavel\Subscription\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Subscription\Models\SubscriptionPeriod;
+use Payavel\Subscription\Models\SubscriptionPlan;
 use Payavel\Subscription\Models\SubscriptionProduct;
+use Payavel\Subscription\SubscriptionStatus;
 
 class SubscriptionPlanFactory extends Factory
 {
@@ -16,13 +18,31 @@ class SubscriptionPlanFactory extends Factory
     public function definition()
     {
         return [
-            'subscription_product_id' => SubscriptionProduct::factory()->create()->id,
             'price' => $this->faker->numberBetween(100, 1000),
             'currency' => $this->faker->currencyCode(),
             'renew_period_id' => SubscriptionPeriod::factory()->create()->id,
-            'grace_period_id' => $this->faker->boolean() ? SubscriptionPeriod::factory()->create()->id : null,
-            'trial_period_id' => $this->faker->boolean() ? SubscriptionPeriod::factory()->create()->id : null,
-            'status' => $this->faker->randomElement([0, 1, 2]),
+            'status' => $this->faker->randomElement([
+                SubscriptionStatus::ACTIVE_AUTO_RENEW_ON,
+                SubscriptionStatus::ACTIVE_AUTO_RENEW_OFF,
+            ]),
         ];
+    }
+
+    /**
+     * Configure the model factory.
+     *
+     * @return $this
+     */
+    public function configure()
+    {
+        return $this->afterMaking(function (SubscriptionPlan $subscriptionPlan) {
+            if (is_null($subscriptionPlan->product_id)) {
+                $subscriptionProduct = SubscriptionProduct::inRandomOrder()->firstOr(function () {
+                    return SubscriptionProduct::factory()->create();
+                });
+
+                $subscriptionPlan->product_id = $subscriptionProduct->id;
+            }
+        });
     }
 }
