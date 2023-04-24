@@ -15,16 +15,6 @@ class SubscriptionAgreement extends Model
     protected $guarded = ['id'];
 
     /**
-     * Retrieve the subscription agreement's plan.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function plan()
-    {
-        return $this->belongsTo(SubscriptionPlan::class);
-    }
-
-    /**
      * Create a new factory instance for the model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
@@ -32,5 +22,15 @@ class SubscriptionAgreement extends Model
     protected static function newFactory()
     {
         return SubscriptionAgreementFactory::new();
+    }
+
+    /**
+     * Retrieve the subscription agreement's plan.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function plan()
+    {
+        return $this->belongsTo(SubscriptionPlan::class);
     }
 }
