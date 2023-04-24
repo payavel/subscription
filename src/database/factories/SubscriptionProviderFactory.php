@@ -3,6 +3,7 @@
 namespace Payavel\Subscription\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 use Payavel\Subscription\Models\SubscriptionProvider;
 
 class SubscriptionProviderFactory extends Factory
@@ -24,10 +25,12 @@ class SubscriptionProviderFactory extends Factory
      */
     public function definition()
     {
+        $studlyName = Str::studly($name = $this->faker->word());
+
         return [
-            'name' => $this->faker->word,
-            'request_class' => PayavelSubscriptionRequest::class,
-            'response_class' => PayavelSubscriptionResponse::class,
+            'name' => $name,
+            'request_class' => "App\\Services\\Subscription\\{$studlyName}SubscriptionRequest",
+            'response_class' => "App\\Services\\Subscription\\{$studlyName}SubscriptionResponse",
         ];
     }
 }
