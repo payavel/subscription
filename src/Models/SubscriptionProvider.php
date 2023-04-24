@@ -25,12 +25,27 @@ class SubscriptionProvider extends Model
     }
 
     /**
-     * Get the provider related subscriptions.
+     * Get the provider's related customers.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function customers()
+    {
+        return $this->hasMany(config('subscription.models.' . SubscriptionCustomer::class, SubscriptionCustomer::class), 'provider_id');
+    }
+
+    /**
+     * Get the provider's related subscriptions.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function subscriptions()
     {
-        return $this->hasMany(config('subscription.models.' . Subscription::class, Subscription::class));
+        return $this->hasManyThrough(
+            config('subscription.models.' . Subscription::class, Subscription::class),
+            config('subscription.models.' . SubscriptionCustomer::class, SubscriptionCustomer::class),
+            'provider_id',
+            'customer_id'
+        );
     }
 }
