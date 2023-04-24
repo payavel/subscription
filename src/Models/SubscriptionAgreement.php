@@ -15,6 +15,16 @@ class SubscriptionAgreement extends Model
     protected $guarded = ['id'];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'start_date' => 'date',
+        'next_billing_date' => 'date',
+    ];
+
+    /**
      * Create a new factory instance for the model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory

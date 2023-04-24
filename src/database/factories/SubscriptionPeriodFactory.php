@@ -12,10 +12,10 @@ class SubscriptionPeriodFactory extends Factory
      * @var array
      */
     private $units = [
-        'day',
-        'week',
-        'month',
-        'year',
+        'days',
+        'weeks',
+        'months',
+        'years',
     ];
 
     /**
@@ -34,10 +34,10 @@ class SubscriptionPeriodFactory extends Factory
     private function getFrequency($unit)
     {
         return [
-            'day' => range(1, 365),
-            'week' => range(1, 52),
-            'month' => range(1, 12),
-            'year' => range(1, 3),
+            'days' => range(1, 365),
+            'weeks' => range(1, 52),
+            'months' => range(1, 12),
+            'years' => range(1, 3),
         ][$unit] ?? 1;
     }
 }
