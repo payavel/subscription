@@ -74,6 +74,16 @@ abstract class SubscriptionResponse implements SubscriptionResponder
     }
 
     /**
+     * Set up the response.
+     *
+     * @return void
+     */
+    protected function setUp()
+    {
+        //
+    }
+
+    /**
      * Configure the response based on the request.
      *
      * @param string $requestMethod

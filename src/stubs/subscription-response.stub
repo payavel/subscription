@@ -7,6 +7,16 @@ use Payavel\Subscription\SubscriptionResponse;
 class {{ name }}SubscriptionResponse extends SubscriptionResponse
 {
     /**
+     * Set up the response.
+     *
+     * @return void
+     */
+    protected function setUp()
+    {
+        //
+    }
+
+    /**
      * Determines the status code based on the request's raw response.
      *
      * @return int
