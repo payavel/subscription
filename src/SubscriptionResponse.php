@@ -71,6 +71,8 @@ abstract class SubscriptionResponse implements SubscriptionResponder
     {
         $this->rawResponse = $rawResponse;
         $this->additionalInformation = $additionalInformation;
+
+        $this->setUp();
     }
 
     /**
