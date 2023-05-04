@@ -32,20 +32,29 @@ class CreateBaseSubscriptionTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('subscriptions', function (Blueprint $table) use ($usingDatabaseDriver) {
+        Schema::create('subscription_customers', function (Blueprint $table) use ($usingDatabaseDriver) {
             $table->bigIncrements('id');
-            $table->unsignedMediumInteger('subscription_product_id');
+            $table->unsignedBigInteger('subscribable_id')->nullable();
+            $table->string('subscribable_type')->nullable();
             $table->string('provider_id');
-            $table->string('reference')->index();
-            $table->unsignedBigInteger('subscriber_id');
-            $table->string('subscriber_type');
-            $table->unsignedSmallInteger('status');
+            $table->string('token')->index();
             $table->timestamps();
 
-            $table->foreign('subscription_product_id')->references('id')->on('subscription_products')->onDelete('cascade');
             if ($usingDatabaseDriver) {
                 $table->foreign('provider_id')->references('id')->on('subscription_providers')->onDelete('set null');
             }
+        });
+
+        Schema::create('subscriptions', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->string('reference')->index();
+            $table->unsignedMediumInteger('product_id');
+            $table->unsignedSmallInteger('status');
+            $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('subscription_customers')->onDelete('set null');
+            $table->foreign('product_id')->references('id')->on('subscription_products')->onDelete('cascade');
         });
     }
 
@@ -57,6 +66,7 @@ class CreateBaseSubscriptionTables extends Migration
     public function down()
     {
         Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('subscription_customers');
         Schema::dropIfExists('subscription_products');
         Schema::dropIfExists('subscription_providers');
     }

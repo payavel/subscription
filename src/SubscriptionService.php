@@ -39,7 +39,7 @@ class SubscriptionService
      */
     public function __construct()
     {
-        if (! class_exists($driver = config('payment.drivers.' . config('payment.defaults.driver', 'config')))) {
+        if (! class_exists($driver = config('subscription.drivers.' . config('subscription.defaults.driver', 'config')))) {
             throw new Exception('The ' . $driver . '::class does not exist.');
         }
 

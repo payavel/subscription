@@ -3,6 +3,7 @@
 namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Payavel\Subscription\Database\Factories\SubscriptionFactory;
 
 class Subscription extends Model
 {
@@ -14,13 +15,23 @@ class Subscription extends Model
     protected $guarded = ['id'];
 
     /**
-     * Get the provider this subscription belongs to..
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return SubscriptionFactory::new();
+    }
+
+    /**
+     * Get this subscription's customer.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function provider()
+    public function customer()
     {
-        return $this->belongsTo(config('subscription.models.' . SubscriptionProvider::class, SubscriptionProvider::class));
+        return $this->belongsTo(config('subscription.models.' . SubscriptionCustomer::class, SubscriptionCustomer::class));
     }
 
     /**

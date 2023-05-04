@@ -2,6 +2,7 @@
 
 namespace Payavel\Subscription;
 
+use BadMethodCallException;
 use Payavel\Subscription\Contracts\Subscribable;
 use Payavel\Subscription\Contracts\SubscriptionRequestor;
 use Payavel\Subscription\Models\Subscription;
@@ -17,18 +18,18 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
      */
     public function plans(SubscriptionProduct $subscriptionProduct)
     {
-        
+        return tap($this->gateway->plans($subscriptionProduct))->configure(__FUNCTION__, $this->provider);
     }
 
     /**
-     * Get all of the subscriber's active agreements.
+     * Get all of the subscribable's active agreements.
      *
-     * @param \Payavel\Subscription\Contracts\Subscribable $subscriber
+     * @param \Payavel\Subscription\Contracts\Subscribable $subscribable
      * @return \Payavel\Subscription\SubscriptionResponse
      */
-    public function listAgreements(Subscribable $subscriber)
+    public function listAgreements(Subscribable $subscribable)
     {
-
+        return tap($this->gateway->listAgreements($subscribable))->configure(__FUNCTION__, $this->provider);
     }
 
     /**
@@ -39,19 +40,19 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
      */
     public function getAgreement(Subscription $subscription)
     {
-
+        return tap($this->gateway->getAgreement($subscription))->configure(__FUNCTION__, $this->provider);
     }
 
     /**
-     * Create a new agreement for the subscriber.
+     * Create a new agreement for the subscribable.
      *
-     * @param \Payavel\Subscription\Contracts\Subscribable $subscriber
+     * @param \Payavel\Subscription\Contracts\Subscribable $subscribable
      * @param array|mixed $data
      * @return \Payavel\Subscription\SubscriptionResponse
      */
-    public function createAgreement(Subscribable $subscriber, $data)
+    public function createAgreement(Subscribable $subscribable, $data)
     {
-
+        return tap($this->gateway->createAgreement($subscribable, $data))->configure(__FUNCTION__, $this->provider);
     }
 
     /**
@@ -63,7 +64,7 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
      */
     public function updateAgreement(Subscription $subscription, $data)
     {
-
+        return tap($this->gateway->updateAgreement($subscription, $data))->configure(__FUNCTION__, $this->provider);
     }
 
     /**
@@ -74,7 +75,7 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
      */
     public function cancelAgreement(Subscription $subscription)
     {
-
+        return tap($this->gateway->cancelAgreement($subscription))->configure(__FUNCTION__, $this->provider);
     }
 
     /**
@@ -85,6 +86,21 @@ class SubscriptionGateway extends SubscriptionService implements SubscriptionReq
      */
     public function activateAgreement(Subscription $subscription)
     {
+        return tap($this->gateway->activateAgreement($subscription))->configure(__FUNCTION__, $this->provider);
+    }
 
+    /**
+     * @param string $method
+     * @param array $params
+     * 
+     * @throws \BadMethodCallException
+     */
+    public function __call($method, $params)
+    {
+        if (! method_exists($this->gateway, $method)) {
+            throw new BadMethodCallException(__CLASS__ . "::{$method}() not found.");
+        }
+
+        return tap($this->gateway->{$method}(...$params))->configure($method, $this->provider);
     }
 }
