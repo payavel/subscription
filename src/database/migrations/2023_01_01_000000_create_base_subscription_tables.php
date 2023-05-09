@@ -56,6 +56,16 @@ class CreateBaseSubscriptionTables extends Migration
             $table->foreign('customer_id')->references('id')->on('subscription_customers')->onDelete('set null');
             $table->foreign('product_id')->references('id')->on('subscription_products')->onDelete('cascade');
         });
+
+        Schema::create('subscribable_payment_method', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->morphs('subscribable');
+            $table->unsignedBigInteger('payment_method_id');
+            $table->unsignedSmallInteger('priority');
+            $table->timestamps();
+
+            $table->foreign('payment_method_id')->references('id')->on('payment_methods');
+        });
     }
 
     /**
