@@ -4,9 +4,12 @@ namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Payavel\Subscription\Database\Factories\SubscriptionFactory;
+use Payavel\Subscription\Models\Traits\SubscriptionRequests;
 
 class Subscription extends Model
 {
+    use SubscriptionRequests;
+
     /**
      * The attributes that aren't mass assignable.
      *
