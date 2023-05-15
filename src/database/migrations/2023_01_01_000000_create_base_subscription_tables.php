@@ -61,7 +61,7 @@ class CreateBaseSubscriptionTables extends Migration
             $table->bigIncrements('id');
             $table->morphs('subscribable');
             $table->unsignedBigInteger('payment_method_id');
-            $table->unsignedSmallInteger('priority');
+            $table->unsignedSmallInteger('role');
             $table->timestamps();
 
             $table->foreign('payment_method_id')->references('id')->on('payment_methods');
@@ -75,6 +75,7 @@ class CreateBaseSubscriptionTables extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('subscribable_payment_method');
         Schema::dropIfExists('subscriptions');
         Schema::dropIfExists('subscription_customers');
         Schema::dropIfExists('subscription_products');

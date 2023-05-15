@@ -29,4 +29,9 @@ return [
         'database' => \Payavel\Subscription\Drivers\DatabaseDriver::class,
     ],
 
+    'payment_method_roles' => [
+        'primary' => 1,
+        'backup' => 2,
+    ],
+
 ];
