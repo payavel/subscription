@@ -21,7 +21,8 @@ trait ConfiguresSubscriptionGateway
     public function getGatewayAttribute()
     {
         if (! isset($this->subscriptionGateway)) {
-            $this->subscriptionGateway = (new SubscriptionGateway);
+            $this->subscriptionGateway = (new SubscriptionGateway)
+                ->provider($this->provider_id);;
         }
 
         return $this->subscriptionGateway;
