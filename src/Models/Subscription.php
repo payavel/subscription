@@ -28,6 +28,16 @@ class Subscription extends Model
     }
 
     /**
+     * Get the subscription's provider id.
+     *
+     * @return string|int
+     */
+    public function getProviderIdAttribute()
+    {
+        return $this->customer->provider_id;
+    }
+
+    /**
      * Get this subscription's customer.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
