@@ -32,7 +32,7 @@ class CreateBaseSubscriptionTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('subscription_customers', function (Blueprint $table) use ($usingDatabaseDriver) {
+        Schema::create('subscription_accounts', function (Blueprint $table) use ($usingDatabaseDriver) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('subscribable_id')->nullable();
             $table->string('subscribable_type')->nullable();
@@ -47,13 +47,13 @@ class CreateBaseSubscriptionTables extends Migration
 
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->unsignedBigInteger('account_id')->nullable();
             $table->string('reference')->index();
             $table->unsignedMediumInteger('product_id');
             $table->unsignedSmallInteger('status');
             $table->timestamps();
 
-            $table->foreign('customer_id')->references('id')->on('subscription_customers')->onDelete('set null');
+            $table->foreign('account_id')->references('id')->on('subscription_accounts')->onDelete('set null');
             $table->foreign('product_id')->references('id')->on('subscription_products')->onDelete('cascade');
         });
 
@@ -77,7 +77,7 @@ class CreateBaseSubscriptionTables extends Migration
     {
         Schema::dropIfExists('subscribable_payment_method');
         Schema::dropIfExists('subscriptions');
-        Schema::dropIfExists('subscription_customers');
+        Schema::dropIfExists('subscription_accounts');
         Schema::dropIfExists('subscription_products');
         Schema::dropIfExists('subscription_providers');
     }

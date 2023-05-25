@@ -5,11 +5,11 @@ namespace Payavel\Subscription\Contracts;
 interface Subscribable
 {
     /**
-     * Get the subscribable's customer information at a provider level.
+     * Get the subscribable's account information at a provider level.
      *
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function customers();
+    public function accounts();
 
     /**
      * Get all of the subscribable's payment methods.
