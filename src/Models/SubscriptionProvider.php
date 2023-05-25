@@ -25,13 +25,13 @@ class SubscriptionProvider extends Model
     }
 
     /**
-     * Get the provider's related customers.
+     * Get the provider's related accounts.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function customers()
+    public function accounts()
     {
-        return $this->hasMany(config('subscription.models.' . SubscriptionCustomer::class, SubscriptionCustomer::class), 'provider_id');
+        return $this->hasMany(config('subscription.models.' . SubscriptionAccount::class, SubscriptionAccount::class), 'provider_id');
     }
 
     /**
@@ -43,9 +43,9 @@ class SubscriptionProvider extends Model
     {
         return $this->hasManyThrough(
             config('subscription.models.' . Subscription::class, Subscription::class),
-            config('subscription.models.' . SubscriptionCustomer::class, SubscriptionCustomer::class),
+            config('subscription.models.' . SubscriptionAccount::class, SubscriptionAccount::class),
             'provider_id',
-            'customer_id'
+            'account_id'
         );
     }
 }

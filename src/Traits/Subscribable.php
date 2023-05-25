@@ -3,18 +3,18 @@
 namespace Payavel\Subscription\Traits;
 
 use Payavel\Checkout\Models\PaymentMethod;
-use Payavel\Subscription\Models\SubscriptionCustomer;
+use Payavel\Subscription\Models\SubscriptionAccount;
 
 trait Subscribable
 {
     /**
-     * Get the subscribable's customer information at a provider level.
+     * Get the subscribable's account information at a provider level.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function customers()
+    public function accounts()
     {
-        return $this->morphMany(config('subscription.models.' . SubscriptionCustomer::class, SubscriptionCustomer::class), 'subscribable');
+        return $this->morphMany(config('subscription.models.' . SubscriptionAccount::class, SubscriptionAccount::class), 'subscribable');
     }
 
     /**

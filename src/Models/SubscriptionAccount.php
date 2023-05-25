@@ -3,9 +3,9 @@
 namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Subscription\Database\Factories\SubscriptionCustomerFactory;
+use Payavel\Subscription\Database\Factories\SubscriptionAccountFactory;
 
-class SubscriptionCustomer extends Model
+class SubscriptionAccount extends Model
 {
     /**
      * The attributes that aren't mass assignable.
@@ -28,7 +28,7 @@ class SubscriptionCustomer extends Model
      */
     protected static function newFactory()
     {
-        return SubscriptionCustomerFactory::new();
+        return SubscriptionAccountFactory::new();
     }
 
     /**

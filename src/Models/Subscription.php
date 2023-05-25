@@ -34,17 +34,17 @@ class Subscription extends Model
      */
     public function getProviderIdAttribute()
     {
-        return $this->customer->provider_id;
+        return $this->account->provider_id;
     }
 
     /**
-     * Get this subscription's customer.
+     * Get this subscription's account.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function customer()
+    public function account()
     {
-        return $this->belongsTo(config('subscription.models.' . SubscriptionCustomer::class, SubscriptionCustomer::class));
+        return $this->belongsTo(config('subscription.models.' . SubscriptionAccount::class, SubscriptionAccount::class));
     }
 
     /**
