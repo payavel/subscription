@@ -15,6 +15,18 @@ class SubscriptionPeriod extends Model
     protected $guarded = ['id'];
 
     /**
+     * Allowed units of measurement.
+     *
+     * @var array
+     */
+    public static $units = [
+        'days',
+        'weeks',
+        'months',
+        'years',
+    ];
+
+    /**
      * Create a new factory instance for the model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
