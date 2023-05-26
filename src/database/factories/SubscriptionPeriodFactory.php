@@ -29,12 +29,12 @@ class SubscriptionPeriodFactory extends Factory
     {
         return $this->afterMaking(function (SubscriptionPeriod $subscriptionPeriod) {
             if (is_null($subscriptionPeriod->frequency)) {
-                $subscriptionPeriod->frequency = $this->faker->randomElement($this->getFrequency($subscriptionPeriod->unit));
+                $subscriptionPeriod->frequency = $this->faker->randomElement($this->getFrequencies($subscriptionPeriod->unit));
             }
         });
     }
 
-    private function getFrequency($unit)
+    private function getFrequencies($unit)
     {
         return [
             'days' => range(1, 365),
