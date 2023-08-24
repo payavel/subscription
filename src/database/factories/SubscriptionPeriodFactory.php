@@ -3,21 +3,10 @@
 namespace Payavel\Subscription\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Payavel\Subscription\Models\SubscriptionPeriod;
 
 class SubscriptionPeriodFactory extends Factory
 {
-    /**
-     * Possible units of measurement.
-     *
-     * @var array
-     */
-    private $units = [
-        'days',
-        'weeks',
-        'months',
-        'years',
-    ];
-
     /**
      * Define the model's default state.
      *
@@ -26,18 +15,32 @@ class SubscriptionPeriodFactory extends Factory
     public function definition()
     {
         return [
-            'unit' => $unit = $this->faker->randomElement($this->units),
+            'unit' => $this->faker->randomElement(SubscriptionPeriod::$units),
             'frequency' => $this->getFrequency($unit),
         ];
     }
 
-    private function getFrequency($unit)
+    /**
+     * Configure the model factory.
+     *
+     * @return $this
+     */
+    public function configure()
+    {
+        return $this->afterMaking(function (SubscriptionPeriod $subscriptionPeriod) {
+            if (is_null($subscriptionPeriod->frequency)) {
+                $subscriptionPeriod->frequency = $this->faker->randomElement($this->getFrequencies($subscriptionPeriod->unit));
+            }
+        });
+    }
+
+    private function getFrequencies($unit)
     {
         return [
             'days' => range(1, 365),
             'weeks' => range(1, 52),
             'months' => range(1, 12),
             'years' => range(1, 3),
-        ][$unit] ?? 1;
+        ][$unit] ?? [1];
     }
 }

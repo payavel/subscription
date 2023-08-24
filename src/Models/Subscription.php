@@ -4,9 +4,12 @@ namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Payavel\Subscription\Database\Factories\SubscriptionFactory;
+use Payavel\Subscription\Models\Traits\SubscriptionRequests;
 
 class Subscription extends Model
 {
+    use SubscriptionRequests;
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -25,13 +28,23 @@ class Subscription extends Model
     }
 
     /**
-     * Get this subscription's customer.
+     * Get the subscription's provider id.
+     *
+     * @return string|int
+     */
+    public function getProviderIdAttribute()
+    {
+        return $this->account->provider_id;
+    }
+
+    /**
+     * Get this subscription's account.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function customer()
+    public function account()
     {
-        return $this->belongsTo(config('subscription.models.' . SubscriptionCustomer::class, SubscriptionCustomer::class));
+        return $this->belongsTo(config('subscription.models.' . SubscriptionAccount::class, SubscriptionAccount::class));
     }
 
     /**

@@ -4,7 +4,7 @@ namespace Payavel\Subscription\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Subscription\Models\Subscription;
-use Payavel\Subscription\Models\SubscriptionCustomer;
+use Payavel\Subscription\Models\SubscriptionAccount;
 use Payavel\Subscription\Models\SubscriptionProduct;
 use Payavel\Subscription\SubscriptionStatus;
 
@@ -28,7 +28,7 @@ class SubscriptionFactory extends Factory
     public function definition()
     {
         return [
-            'customer_id' => SubscriptionCustomer::factory()->create()->id,
+            'account_id' => SubscriptionAccount::factory()->create()->id,
             'reference' => $this->faker->uuid(),
             'status' => $this->faker->randomElement([
                 SubscriptionStatus::ACTIVE_AUTO_RENEW_ON,
