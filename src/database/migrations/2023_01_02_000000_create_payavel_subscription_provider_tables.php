@@ -3,9 +3,12 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Payavel\Serviceable\Traits\ServiceableConfig;
 
 class CreatePayavelSubscriptionProviderTables extends Migration
 {
+    use ServiceableConfig;
+
     /**
      * Run the migrations.
      *
@@ -13,7 +16,7 @@ class CreatePayavelSubscriptionProviderTables extends Migration
      */
     public function up()
     {
-        if (! in_array('payavel', array_keys(config('subscription.providers')))) {
+        if (! in_array('payavel', array_keys($this->config('subscription', 'providers')))) {
             return;
         }
     
