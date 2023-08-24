@@ -7,8 +7,9 @@ use Payavel\Subscription\Contracts\Subscribable;
 use Payavel\Subscription\Contracts\SubscriptionRequestor;
 use Payavel\Subscription\Models\Subscription;
 use Payavel\Subscription\Models\SubscriptionProduct;
+use Payavel\Serviceable\Service;
 
-class SubscriptionGateway extends SubscriptionService implements SubscriptionRequestor
+class SubscriptionGateway extends Service implements SubscriptionRequestor
 {
     /**
      * Retrieve the product's active subscription plans.

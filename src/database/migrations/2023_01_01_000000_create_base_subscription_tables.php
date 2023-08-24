@@ -3,9 +3,12 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Payavel\Serviceable\Traits\ServiceableConfig;
 
 class CreateBaseSubscriptionTables extends Migration
 {
+    use ServiceableConfig;
+
     /**
      * Run the migrations.
      *
@@ -13,17 +16,7 @@ class CreateBaseSubscriptionTables extends Migration
      */
     public function up()
     {
-        $usingDatabaseDriver = config('subscription.defaults.driver') === 'database';
-
-        if ($usingDatabaseDriver) {
-            Schema::create('subscription_providers', function (Blueprint $table) {
-                $table->string('id')->primary();
-                $table->string('name');
-                $table->string('request_class');
-                $table->string('response_class');
-                $table->timestamps();
-            });
-        }
+        $usingDatabaseDriver = $this->config('subscription', 'defaults.driver') === 'database';
 
         Schema::create('subscription_products', function (Blueprint $table) {
             $table->mediumIncrements('id');

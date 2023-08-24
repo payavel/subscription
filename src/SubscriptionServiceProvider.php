@@ -2,8 +2,10 @@
 
 namespace Payavel\Subscription;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Payavel\Subscription\Console\Commands\MakeProvider;
+use Payavel\Serviceable\Service;
 
 class SubscriptionServiceProvider extends ServiceProvider
 {
@@ -23,7 +25,7 @@ class SubscriptionServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(SubscriptionGateway::class, function ($app) {
-            return new SubscriptionGateway();
+            return new SubscriptionGateway(Service::find('subscription'));
         });
 
         $this->mergeConfigFrom(

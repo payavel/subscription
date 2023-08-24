@@ -2,7 +2,7 @@
 
 namespace Payavel\Subscription;
 
-use Payavel\Checkout\Contracts\Providable;
+use Payavel\Serviceable\Contracts\Providable;
 use Payavel\Subscription\Contracts\SubscriptionRequestor;
 use Payavel\Subscription\Traits\SubscriptionRequests;
 
@@ -13,13 +13,12 @@ abstract class SubscriptionRequest implements SubscriptionRequestor
     /**
      * The subscription provider.
      *
-     * @var \Payavel\Checkout\Contracts\Providable
+     * @var \Payavel\Serviceable\Contracts\Providable
      */
     protected $provider;
 
     /**
-     * @param  \Payavel\Checkout\Contracts\Providable $provider
-     * @param  \Payavel\Checkout\Contracts\Merchantable $merchant
+     * @param  \Payavel\Serviceable\Contracts\Providable $provider
      */
     public function __construct(Providable $provider)
     {

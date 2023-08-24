@@ -2,7 +2,9 @@
 
 namespace Payavel\Subscription\Traits;
 
-use Payavel\Checkout\Traits\ThrowsRuntimeException;
+use Exception;
+use Payavel\Serviceable\Traits\ThrowsRuntimeException;
+use RuntimeException;
 
 trait SubscriptionResponses
 {

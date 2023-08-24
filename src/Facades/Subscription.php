@@ -7,9 +7,9 @@ use Payavel\Subscription\SubscriptionGateway;
 
 /**
  * @method static \Payavel\Subscription\SubscriptionGateway provider($provider)
- * @method static \Payavel\Checkout\Contracts\Providable getProvider()
+ * @method static \Payavel\Serviceable\Contracts\Providable getProvider()
  * @method static void setProvider($provider)
- * @method static string|int|\Payavel\Checkout\Contracts\Providable getDefaultProvider()
+ * @method static string|int|\Payavel\Serviceable\Contracts\Providable getDefaultProvider()
  * TODO: Document the rest.
  * 
  * @see \Payavel\Subscription\SubscriptionGateway

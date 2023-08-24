@@ -24,6 +24,7 @@
         }
     },
     "require": {
-        "payavel/checkout": "^1.0"
+        "payavel/checkout": "^1.0",
+        "payavel/serviceable": "dev-master"
     }
 }
