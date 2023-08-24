@@ -5,7 +5,7 @@ namespace Payavel\Subscription\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Payavel\Subscription\Models\SubscriptionAccount;
-use Payavel\Subscription\Models\SubscriptionProvider;
+use Payavel\Serviceable\Models\Provider;
 
 class SubscriptionAccountFactory extends Factory
 {
@@ -55,8 +55,8 @@ class SubscriptionAccountFactory extends Factory
 
     protected function getProviderIdViaDatabase()
     {
-        return SubscriptionProvider::inRandomOrder()->firstOr(function () {
-            return SubscriptionProvider::factory()->create();
+        return Provider::inRandomOrder()->firstOr(function () {
+            return Provider::factory()->create();
         })->id;
     }
 }

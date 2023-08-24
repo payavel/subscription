@@ -4,6 +4,7 @@ namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Payavel\Subscription\Database\Factories\SubscriptionAccountFactory;
+use Payavel\Serviceable\Models\Provider;
 
 class SubscriptionAccount extends Model
 {
@@ -38,7 +39,7 @@ class SubscriptionAccount extends Model
      */
     public function provider()
     {
-        return $this->belongsTo(config('subscription.models.' . SubscriptionProvider::class, SubscriptionProvider::class));
+        return $this->belongsTo(config('subscription.models.' . Provider::class, Provider::class));
     }
 
     /**

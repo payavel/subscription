@@ -2,8 +2,8 @@
 
 namespace Payavel\Subscription;
 
-use Payavel\Checkout\Contracts\Providable;
-use Payavel\Checkout\Traits\SimulateAttributes;
+use Payavel\Serviceable\Contracts\Providable;
+use Payavel\Serviceable\Traits\SimulateAttributes;
 use Payavel\Subscription\Traits\SubscriptionResponses;
 use Payavel\Subscription\Contracts\SubscriptionResponder;
 
@@ -52,7 +52,7 @@ abstract class SubscriptionResponse implements SubscriptionResponder
     /**
      * The provider that the $request was made towards.
      *
-     * @var \Payavel\Checkout\Contracts\Providable
+     * @var \Payavel\Serviceable\Contracts\Providable
      */
     public $provider;
 
@@ -89,7 +89,7 @@ abstract class SubscriptionResponse implements SubscriptionResponder
      * Configure the response based on the request.
      *
      * @param string $requestMethod
-     * @param \Payavel\Checkout\Contracts\Providable $provider
+     * @param \Payavel\Serviceable\Contracts\Providable $provider
      * @return void
      */
     public function configure(string $requestMethod, Providable $provider)
