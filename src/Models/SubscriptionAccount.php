@@ -3,11 +3,22 @@
 namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Subscription\Database\Factories\SubscriptionAccountFactory;
+use Payavel\Serviceable\Traits\HasFactory;
 use Payavel\Serviceable\Models\Provider;
+use Payavel\Serviceable\Traits\ServesConfig;
 
 class SubscriptionAccount extends Model
 {
+    use HasFactory,
+        ServesConfig;
+
+    /**
+     * Custom factory namespace fallback.
+     *
+     * @var string
+     */
+    protected static $factoryNamespace = 'Payavel\\Subscription\\Database\\Factories';
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -23,23 +34,19 @@ class SubscriptionAccount extends Model
     protected $hidden = ['token'];
 
     /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return SubscriptionAccountFactory::new();
-    }
-
-    /**
      * Get the provider this subscribable belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function provider()
     {
-        return $this->belongsTo(config('subscription.models.' . Provider::class, Provider::class));
+        return $this->belongsTo(
+            $this->config(
+                'subscription',
+                'models.' . Provider::class,
+                Provider::class
+            )
+        );
     }
 
     /**
@@ -59,6 +66,13 @@ class SubscriptionAccount extends Model
      */
     public function subscriptions()
     {
-        return $this->hasMany(config('subscription.models.' . Subscription::class, Subscription::class), 'account_id');
+        return $this->hasMany(
+            $this->config(
+                'subscription',
+                'models.' . Subscription::class,
+                Subscription::class
+            ),
+            'account_id'
+        );
     }
 }

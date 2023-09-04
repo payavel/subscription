@@ -3,12 +3,22 @@
 namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Subscription\Database\Factories\SubscriptionFactory;
+use Payavel\Serviceable\Traits\HasFactory;
+use Payavel\Serviceable\Traits\ServesConfig;
 use Payavel\Subscription\Models\Traits\SubscriptionRequests;
 
 class Subscription extends Model
 {
-    use SubscriptionRequests;
+    use HasFactory,
+        ServesConfig,
+        SubscriptionRequests;
+
+    /**
+     * Custom factory namespace fallback.
+     *
+     * @var string
+     */
+    protected static $factoryNamespace = 'Payavel\\Subscription\\Database\\Factories';
 
     /**
      * The attributes that aren't mass assignable.
@@ -16,16 +26,6 @@ class Subscription extends Model
      * @var string[]|bool
      */
     protected $guarded = ['id'];
-
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return SubscriptionFactory::new();
-    }
 
     /**
      * Get the subscription's provider id.
@@ -44,7 +44,13 @@ class Subscription extends Model
      */
     public function account()
     {
-        return $this->belongsTo(config('subscription.models.' . SubscriptionAccount::class, SubscriptionAccount::class));
+        return $this->belongsTo(
+            $this->config(
+                'subscription',
+                'models.' . SubscriptionAccount::class,
+                SubscriptionAccount::class
+            )
+        );
     }
 
     /**
@@ -54,6 +60,12 @@ class Subscription extends Model
      */
     public function product()
     {
-        return $this->belongsTo(config('subscription.models.' . SubscriptionProduct::class, SubscriptionProduct::class));
+        return $this->belongsTo(
+            $this->config(
+                'subscription',
+                'models.' . SubscriptionProduct::class,
+                SubscriptionProduct::class
+            )
+        );
     }
 }
