@@ -10,7 +10,12 @@ use Payavel\Subscription\SubscriptionGateway;
  * @method static \Payavel\Serviceable\Contracts\Providable getProvider()
  * @method static void setProvider($provider)
  * @method static string|int|\Payavel\Serviceable\Contracts\Providable getDefaultProvider()
- * TODO: Document the rest.
+ * @method static \Payavel\Subscription\SubscriptionGateway merchant($merchant)
+ * @method static \Payavel\Serviceable\Contracts\Merchantable getMerchant()
+ * @method static void setMerchant($merchant)
+ * @method static string|int|\Payavel\Serviceable\Contracts\Merchantable getDefaultMerchant()
+ * @method static void reset()
+ * TODO: Document the rest once defined.
  * 
  * @see \Payavel\Subscription\SubscriptionGateway
  */
