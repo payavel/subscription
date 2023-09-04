@@ -3,10 +3,21 @@
 namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Subscription\Database\Factories\SubscriptionPlanFactory;
+use Payavel\Serviceable\Traits\HasFactory;
+use Payavel\Serviceable\Traits\ServesConfig;
 
 class SubscriptionPlan extends Model
 {
+    use HasFactory,
+        ServesConfig;
+
+    /**
+     * Custom factory namespace fallback.
+     *
+     * @var string
+     */
+    protected static $factoryNamespace = 'Payavel\\Subscription\\Database\\Factories';
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -15,23 +26,19 @@ class SubscriptionPlan extends Model
     protected $guarded = ['id'];
 
     /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return SubscriptionPlanFactory::new();
-    }
-
-    /**
      * Get the product this plan relates to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product()
     {
-        return $this->belongsTo(config('subscription.models.' . SubscriptionProduct::class, SubscriptionProduct::class));
+        return $this->belongsTo(
+            $this->config(
+                'subscription',
+                'models.' . SubscriptionProduct::class,
+                SubscriptionProduct::class
+            )
+        );
     }
 
     /**

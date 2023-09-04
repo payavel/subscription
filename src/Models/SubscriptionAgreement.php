@@ -4,10 +4,21 @@ namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Payavel\Checkout\Models\PaymentMethod;
-use Payavel\Subscription\Database\Factories\SubscriptionAgreementFactory;
+use Payavel\Serviceable\Traits\HasFactory;
+use Payavel\Serviceable\Traits\ServesConfig;
 
 class SubscriptionAgreement extends Model
 {
+    use HasFactory,
+        ServesConfig;
+
+    /**
+     * Custom factory namespace fallback.
+     *
+     * @var string
+     */
+    protected static $factoryNamespace = 'Payavel\\Subscription\\Database\\Factories';
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -26,16 +37,6 @@ class SubscriptionAgreement extends Model
     ];
 
     /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return SubscriptionAgreementFactory::new();
-    }
-
-    /**
      * Retrieve the subscription agreement's plan.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -52,7 +53,13 @@ class SubscriptionAgreement extends Model
      */
     public function primaryPaymentMethod()
     {
-        return $this->belongsTo(config('payment.models.' . PaymentMethod::class, PaymentMethod::class));
+        return $this->belongsTo(
+            $this->config(
+                'checkout',
+                'models.' . PaymentMethod::class,
+                PaymentMethod::class
+            )
+        );
     }
 
     /**
@@ -62,6 +69,12 @@ class SubscriptionAgreement extends Model
      */
     public function backupPaymentMethod()
     {
-        return $this->belongsTo(config('payment.models.' . PaymentMethod::class, PaymentMethod::class));
+        return $this->belongsTo(
+            $this->config(
+                'checkout',
+                'models.' . PaymentMethod::class,
+                PaymentMethod::class
+            )
+        );
     }
 }

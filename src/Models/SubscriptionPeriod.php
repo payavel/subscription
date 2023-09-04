@@ -3,10 +3,19 @@
 namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Payavel\Subscription\Database\Factories\SubscriptionPeriodFactory;
+use Payavel\Serviceable\Traits\HasFactory;
 
 class SubscriptionPeriod extends Model
 {
+    use HasFactory;
+
+    /**
+     * Custom factory namespace fallback.
+     *
+     * @var string
+     */
+    protected static $factoryNamespace = 'Payavel\\Subscription\\Database\\Factories';
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -25,14 +34,4 @@ class SubscriptionPeriod extends Model
         'months',
         'years',
     ];
-
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return SubscriptionPeriodFactory::new();
-    }
 }
