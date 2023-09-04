@@ -3,7 +3,6 @@
 namespace Payavel\Subscription\Console\Commands;
 
 use Payavel\Serviceable\Console\Commands\MakeProvider as Command;
-use Illuminate\Support\Facades\Artisan;
 
 class MakeProvider extends Command
 {
