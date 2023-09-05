@@ -3,11 +3,11 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Payavel\Serviceable\Traits\ServiceableConfig;
+use Payavel\Serviceable\Traits\ServesConfig;
 
 class CreateBaseSubscriptionTables extends Migration
 {
-    use ServiceableConfig;
+    use ServesConfig;
 
     /**
      * Run the migrations.
@@ -30,11 +30,13 @@ class CreateBaseSubscriptionTables extends Migration
             $table->unsignedBigInteger('subscribable_id')->nullable();
             $table->string('subscribable_type')->nullable();
             $table->string('provider_id');
+            $table->string('merchant_id');
             $table->string('token')->index();
             $table->timestamps();
 
             if ($usingDatabaseDriver) {
-                $table->foreign('provider_id')->references('id')->on('subscription_providers')->onDelete('set null');
+                $table->foreign('provider_id')->references('id')->on('providers')->onDelete('set null');
+                $table->foreign('merchant_id')->references('id')->on('merchants')->onDelete('set null');
             }
         });
 
@@ -72,6 +74,5 @@ class CreateBaseSubscriptionTables extends Migration
         Schema::dropIfExists('subscriptions');
         Schema::dropIfExists('subscription_accounts');
         Schema::dropIfExists('subscription_products');
-        Schema::dropIfExists('subscription_providers');
     }
 }
