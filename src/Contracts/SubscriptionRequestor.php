@@ -17,7 +17,7 @@ interface SubscriptionRequestor
     public function plans(SubscriptionProduct $product);
 
     /**
-     * Get all of the subscribable's active agreements.
+     * Get all the subscribable's active agreements.
      *
      * @param \Payavel\Subscription\Contracts\Subscribable $subscribable
      * @return \Payavel\Subscription\SubscriptionResponse
