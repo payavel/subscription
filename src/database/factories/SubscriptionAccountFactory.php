@@ -4,11 +4,15 @@ namespace Payavel\Subscription\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Payavel\Serviceable\Models\Merchant;
+use Payavel\Serviceable\Traits\ServesConfig;
 use Payavel\Subscription\Models\SubscriptionAccount;
 use Payavel\Serviceable\Models\Provider;
 
 class SubscriptionAccountFactory extends Factory
 {
+    use ServesConfig;
+
     /**
      * The name of the factory's corresponding model.
      *
@@ -16,7 +20,11 @@ class SubscriptionAccountFactory extends Factory
      */
     public function modelName()
     {
-        return config('subscription.models.' . SubscriptionAccount::class, SubscriptionAccount::class);
+        return $this->config(
+            'subscription',
+            'models.' . SubscriptionAccount::class,
+            SubscriptionAccount::class
+        );
     }
 
     /**
@@ -39,24 +47,29 @@ class SubscriptionAccountFactory extends Factory
     public function configure()
     {
         return $this->afterMaking(function (SubscriptionAccount $subscriptionAccount) {
-            if (
-                is_null($subscriptionAccount->provider_id) &&
-                method_exists($this, $getProviderId = 'getProviderIdVia' . Str::studly(config('subscription.defaults.driver')))
-            ) {
-                $subscriptionAccount->provider_id = $this->{$getProviderId}();
+            if (is_null($subscriptionAccount->provider_id)) {
+                $provider = $this->config(
+                    'subscription',
+                    'models.' . Provider::class,
+                    Provider::class
+                );
+
+                $subscriptionAccount->provider_id = $provider::inRandomOrder()
+                    ->firstOr(fn () => $provider::factory()->create())
+                    ->id;
+            }
+
+            if (is_null($subscriptionAccount->merchant_id)) {
+                $merchant = $this->config(
+                    'subscription',
+                    'models.' . Merchant::class,
+                    Merchant::class
+                );
+
+                $subscriptionAccount->merchant_id = $merchant::inRandomOrder()
+                    ->firstOr(fn () => $merchant::factory()->create())
+                    ->id;
             }
         });
-    }
-
-    protected function getProviderIdViaConfig()
-    {
-        return $this->faker->randomElement(array_keys(config('subscription.providers')));
-    }
-
-    protected function getProviderIdViaDatabase()
-    {
-        return Provider::inRandomOrder()->firstOr(function () {
-            return Provider::factory()->create();
-        })->id;
     }
 }

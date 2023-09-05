@@ -3,10 +3,13 @@
 namespace Payavel\Subscription\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Payavel\Serviceable\Traits\ServesConfig;
 use Payavel\Subscription\Models\SubscriptionProduct;
 
 class SubscriptionProductFactory extends Factory
 {
+    use ServesConfig;
+
     /**
      * The name of the factory's corresponding model.
      *
@@ -14,7 +17,11 @@ class SubscriptionProductFactory extends Factory
      */
     public function modelName()
     {
-        return config('subscription.models.' . SubscriptionProduct::class, SubscriptionProduct::class);
+        return $this->config(
+            'subscription',
+            'models.' . SubscriptionProduct::class,
+            SubscriptionProduct::class
+        );
     }
 
     /**

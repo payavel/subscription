@@ -3,7 +3,6 @@
 namespace Payavel\Subscription\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Carbon;
 use Payavel\Subscription\Models\SubscriptionPlan;
 use Payavel\Checkout\Models\PaymentMethod;
 use Payavel\Subscription\Models\SubscriptionAgreement;
@@ -11,6 +10,16 @@ use Payavel\Subscription\SubscriptionStatus;
 
 class SubscriptionAgreementFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @return string
+     */
+    public function modelName()
+    {
+        return SubscriptionAgreement::class;
+    }
+
     /**
      * Define the model's default state.
      *
