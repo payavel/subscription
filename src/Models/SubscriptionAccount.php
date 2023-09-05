@@ -50,6 +50,22 @@ class SubscriptionAccount extends Model
     }
 
     /**
+     * Get the merchant this subscribable belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function merchant()
+    {
+        return $this->belongsTo(
+            $this->config(
+                'subscription',
+                'models.' . Provider::class,
+                Provider::class
+            )
+        );
+    }
+
+    /**
      * Get the subscribable model entity.
      * 
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
