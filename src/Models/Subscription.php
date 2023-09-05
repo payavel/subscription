@@ -28,23 +28,23 @@ class Subscription extends Model
     protected $guarded = ['id'];
 
     /**
-     * Get the subscription's provider id.
+     * Get the subscription's provider.
      *
      * @return string|int
      */
-    public function getProviderIdAttribute()
+    public function getProviderAttribute()
     {
-        return $this->account->provider_id;
+        return $this->account->provider;
     }
 
     /**
-     * Get the subscription's merchant id.
+     * Get the subscription's merchant.
      *
      * @return string|int
      */
-    public function getMerchantIdAttribute()
+    public function getMerchantAttribute()
     {
-        return $this->account->merchant_id;
+        return $this->account->merchant;
     }
 
     /**
