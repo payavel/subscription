@@ -3,11 +3,11 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Payavel\Serviceable\Traits\ServiceableConfig;
+use Payavel\Serviceable\Traits\ServesConfig;
 
 class CreatePayavelSubscriptionProviderTables extends Migration
 {
-    use ServiceableConfig;
+    use ServesConfig;
 
     /**
      * Run the migrations.
