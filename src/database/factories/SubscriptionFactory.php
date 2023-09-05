@@ -3,6 +3,7 @@
 namespace Payavel\Subscription\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Payavel\Serviceable\Traits\ServesConfig;
 use Payavel\Subscription\Models\Subscription;
 use Payavel\Subscription\Models\SubscriptionAccount;
 use Payavel\Subscription\Models\SubscriptionProduct;
@@ -10,6 +11,8 @@ use Payavel\Subscription\SubscriptionStatus;
 
 class SubscriptionFactory extends Factory
 {
+    use ServesConfig;
+
     /**
      * The name of the factory's corresponding model.
      *
@@ -17,7 +20,11 @@ class SubscriptionFactory extends Factory
      */
     public function modelName()
     {
-        return config('subscription.models.' . Subscription::class, Subscription::class);
+        return $this->config(
+            'subscription',
+            'models.' . Subscription::class,
+            Subscription::class
+        );
     }
 
     /**
@@ -45,12 +52,28 @@ class SubscriptionFactory extends Factory
     public function configure()
     {
         return $this->afterMaking(function (Subscription $subscription) {
-            if (is_null($subscription->product_id)) {
-                $subscriptionProduct = SubscriptionProduct::inRandomOrder()->firstOr(function () {
-                    return SubscriptionProduct::factory()->create();
-                });
+            if (is_null($subscription->account_id)) {
+                $subscriptionAccount = $this->config(
+                    'subscription',
+                    'models.' . SubscriptionAccount::class,
+                    SubscriptionAccount::class
+                );
 
-                $subscription->product_id = $subscriptionProduct->id;
+                $subscription->account_id = $subscriptionAccount::inRandomOrder()
+                    ->firstOr(fn () => $subscriptionAccount::factory()->create())
+                    ->id;
+            }
+
+            if (is_null($subscription->product_id)) {
+                $subscriptionProduct = $this->config(
+                    'subscription',
+                    'models.' . SubscriptionProduct::class,
+                    SubscriptionProduct::class
+                );
+
+                $subscription->product_id = $subscriptionProduct::inRandomOrder()
+                    ->firstOr(fn () => $subscriptionProduct::factory()->create())
+                    ->id;
             }
         });
     }

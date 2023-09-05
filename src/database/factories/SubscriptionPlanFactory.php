@@ -11,6 +11,16 @@ use Payavel\Subscription\SubscriptionStatus;
 class SubscriptionPlanFactory extends Factory
 {
     /**
+     * The name of the factory's corresponding model.
+     *
+     * @return string
+     */
+    public function modelName()
+    {
+        return SubscriptionPlan::class;
+    }
+
+    /**
      * Define the model's default state.
      *
      * @return array
@@ -20,7 +30,6 @@ class SubscriptionPlanFactory extends Factory
         return [
             'price' => $this->faker->numberBetween(100, 1000),
             'currency' => $this->faker->currencyCode(),
-            'renew_period_id' => SubscriptionPeriod::factory()->create()->id,
             'status' => $this->faker->randomElement([
                 SubscriptionStatus::ACTIVE_AUTO_RENEW_ON,
                 SubscriptionStatus::ACTIVE_AUTO_RENEW_OFF,
@@ -37,11 +46,15 @@ class SubscriptionPlanFactory extends Factory
     {
         return $this->afterMaking(function (SubscriptionPlan $subscriptionPlan) {
             if (is_null($subscriptionPlan->product_id)) {
-                $subscriptionProduct = SubscriptionProduct::inRandomOrder()->firstOr(function () {
-                    return SubscriptionProduct::factory()->create();
-                });
+                $subscriptionPlan->product_id = SubscriptionProduct::inRandomOrder()
+                    ->firstOr(fn () => SubscriptionProduct::factory()->create())
+                    ->id;
+            }
 
-                $subscriptionPlan->product_id = $subscriptionProduct->id;
+            if (is_null($subscriptionPlan->renew_period_id)) {
+                $subscriptionPlan->renew_period_id = SubscriptionPeriod::inRandomOrder()
+                    ->firstOr(fn () => SubscriptionPeriod::factory()->create())
+                    ->id;
             }
         });
     }

@@ -8,6 +8,16 @@ use Payavel\Subscription\Models\SubscriptionPeriod;
 class SubscriptionPeriodFactory extends Factory
 {
     /**
+     * The name of the factory's corresponding model.
+     *
+     * @return string
+     */
+    public function modelName()
+    {
+        return SubscriptionPeriod::class;
+    }
+
+    /**
      * Define the model's default state.
      *
      * @return array
@@ -15,23 +25,9 @@ class SubscriptionPeriodFactory extends Factory
     public function definition()
     {
         return [
-            'unit' => $this->faker->randomElement(SubscriptionPeriod::$units),
-            'frequency' => $this->getFrequency($unit),
+            'unit' => $unit = $this->faker->randomElement(SubscriptionPeriod::$units),
+            'frequency' => $this->faker->randomElement($this->getFrequencies($unit)),
         ];
-    }
-
-    /**
-     * Configure the model factory.
-     *
-     * @return $this
-     */
-    public function configure()
-    {
-        return $this->afterMaking(function (SubscriptionPeriod $subscriptionPeriod) {
-            if (is_null($subscriptionPeriod->frequency)) {
-                $subscriptionPeriod->frequency = $this->faker->randomElement($this->getFrequencies($subscriptionPeriod->unit));
-            }
-        });
     }
 
     private function getFrequencies($unit)
