@@ -12,6 +12,18 @@ use Payavel\Serviceable\Service;
 class SubscriptionGateway extends Service implements SubscriptionRequestor
 {
     /**
+     * Injects the subscription service into the parent class.
+     *
+     * @return void
+     *
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        parent::__construct(Service::find('subscription'));
+    }
+
+    /**
      * Retrieve the product's active subscription plans.
      *
      * @param \Payavel\Subscription\Models\SubscriptionProduct $product
@@ -23,7 +35,7 @@ class SubscriptionGateway extends Service implements SubscriptionRequestor
     }
 
     /**
-     * Get all of the subscribable's active agreements.
+     * Get all the subscribable's active agreements.
      *
      * @param \Payavel\Subscription\Contracts\Subscribable $subscribable
      * @return \Payavel\Subscription\SubscriptionResponse

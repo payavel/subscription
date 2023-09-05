@@ -38,6 +38,16 @@ class Subscription extends Model
     }
 
     /**
+     * Get the subscription's merchant id.
+     *
+     * @return string|int
+     */
+    public function getMerchantIdAttribute()
+    {
+        return $this->account->merchant_id;
+    }
+
+    /**
      * Get this subscription's account.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
