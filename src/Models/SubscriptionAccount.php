@@ -3,6 +3,7 @@
 namespace Payavel\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Payavel\Serviceable\Models\Merchant;
 use Payavel\Serviceable\Traits\HasFactory;
 use Payavel\Serviceable\Models\Provider;
 use Payavel\Serviceable\Traits\ServesConfig;
@@ -59,8 +60,8 @@ class SubscriptionAccount extends Model
         return $this->belongsTo(
             $this->config(
                 'subscription',
-                'models.' . Provider::class,
-                Provider::class
+                'models.' . Merchant::class,
+                Merchant::class
             )
         );
     }
