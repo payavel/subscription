@@ -18,7 +18,7 @@ trait Subscribable
     }
 
     /**
-     * Get all of the subscribable's payment methods.
+     * Get all the subscribable's payment methods.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
