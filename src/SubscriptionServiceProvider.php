@@ -30,7 +30,7 @@ class SubscriptionServiceProvider extends ServiceProvider
     protected function registerPublishableAssets()
     {
         $this->publishes([
-            __DIR__ . '/stubs/config-publish.stub' => config_path('subscription.php'),
+            __DIR__ . '/../stubs/config-publish.stub' => config_path('subscription.php'),
         ], 'subscription-config');
 
         $this->publishes([
@@ -38,8 +38,8 @@ class SubscriptionServiceProvider extends ServiceProvider
         ], 'subscription-migrations');
 
         $this->publishes([
-            __DIR__ . '/stubs/subscription-request.stub' => base_path('stubs/serviceable/subscription/subscription-request.stub'),
-            __DIR__ . '/stubs/subscription-response.stub' => base_path('stubs/serviceable/subscription/subscription-response.stub'),
+            __DIR__ . '/../stubs/subscription-request.stub' => base_path('stubs/serviceable/subscription/subscription-request.stub'),
+            __DIR__ . '/../stubs/subscription-response.stub' => base_path('stubs/serviceable/subscription/subscription-response.stub'),
         ],'subscription-stubs');
     }
 
