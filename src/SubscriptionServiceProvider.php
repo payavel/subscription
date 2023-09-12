@@ -25,22 +25,22 @@ class SubscriptionServiceProvider extends ServiceProvider
         $this->app->singleton(SubscriptionGateway::class, function ($app) {
             return new SubscriptionGateway;
         });
-
-        $this->mergeConfigFrom(
-            __DIR__ . '/config/subscription.php',
-            'subscription'
-        );
     }
 
     protected function registerPublishableAssets()
     {
         $this->publishes([
             __DIR__ . '/stubs/config-publish.stub' => config_path('subscription.php'),
-        ], 'payavel-config');
+        ], 'subscription-config');
 
         $this->publishes([
             __DIR__ . '/database/migrations/2023_01_01_000000_create_base_subscription_tables.php' => database_path('migrations/2023_01_01_000000_create_base_subscription_tables.php'),
-        ], 'payavel-migrations');
+        ], 'subscription-migrations');
+
+        $this->publishes([
+            __DIR__ . '/stubs/subscription-request.stub' => base_path('stubs/serviceable/subscription/subscription-request.stub'),
+            __DIR__ . '/stubs/subscription-response.stub' => base_path('stubs/serviceable/subscription/subscription-response.stub'),
+        ],'subscription-stubs');
     }
 
     protected function registerCommands()
