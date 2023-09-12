@@ -3,6 +3,7 @@
 namespace Payavel\Subscription\Traits;
 
 use Payavel\Checkout\Models\PaymentMethod;
+use Payavel\Subscription\Models\SubscribablePaymentMethod;
 use Payavel\Subscription\Models\SubscriptionAccount;
 
 trait Subscribable
@@ -41,7 +42,7 @@ trait Subscribable
     public function primaryPaymentMethod()
     {
         return $this->paymentMethods->first(function ($paymentMethod) {
-            return $paymentMethod->pivot->role === config('subscription.payment_method_roles.primary');
+            return $paymentMethod->pivot->role === SubscribablePaymentMethod::PRIMARY_ROLE;
         });
     }
 
@@ -53,7 +54,7 @@ trait Subscribable
     public function backupPaymentMethod()
     {
         return $this->paymentMethods->first(function ($paymentMethod) {
-            return $paymentMethod->pivot->role === config('subscription.payment_method_roles.backup');
+            return $paymentMethod->pivot->role === SubscribablePaymentMethod::BACKUP_ROLE;
         });
     }
 

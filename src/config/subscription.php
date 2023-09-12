@@ -14,9 +14,4 @@ return [
     */
     'test_mode' => false,
 
-    'payment_method_roles' => [
-        'primary' => 1,
-        'backup' => 2,
-    ],
-
 ];
