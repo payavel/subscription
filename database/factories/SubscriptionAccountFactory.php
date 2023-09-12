@@ -3,7 +3,6 @@
 namespace Payavel\Subscription\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use Payavel\Serviceable\Models\Merchant;
 use Payavel\Serviceable\Traits\ServesConfig;
 use Payavel\Subscription\Models\SubscriptionAccount;
