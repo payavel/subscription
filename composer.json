@@ -13,7 +13,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Payavel\\Subscription\\": "src/"
+            "Payavel\\Subscription\\": "src/",
+            "Payavel\\Subscription\\Database\\Factories\\": "database/factories/"
         }
     },
     "extra": {

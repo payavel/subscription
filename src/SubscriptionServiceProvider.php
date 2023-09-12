@@ -34,7 +34,7 @@ class SubscriptionServiceProvider extends ServiceProvider
         ], 'subscription-config');
 
         $this->publishes([
-            __DIR__ . '/database/migrations/2023_01_01_000000_create_base_subscription_tables.php' => database_path('migrations/2023_01_01_000000_create_base_subscription_tables.php'),
+            __DIR__ . '/../database/migrations/2023_01_01_000000_create_base_subscription_tables.php' => database_path('migrations/2023_01_01_000000_create_base_subscription_tables.php'),
         ], 'subscription-migrations');
 
         $this->publishes([
@@ -52,6 +52,6 @@ class SubscriptionServiceProvider extends ServiceProvider
 
     protected function registerMigrations()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 }
