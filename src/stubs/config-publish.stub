@@ -42,7 +42,6 @@ return [
     'providers' => [
 
         'payavel' => [
-            'name' => 'Payavel',
             'request_class' => Payavel\Subscription\Services\Subscription\PayavelSubscriptionRequest::class,
             'response_class' => Payavel\Subscription\Services\Subscription\PayavelSubscriptionResponse::class,
         ],
