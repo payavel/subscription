@@ -1,0 +1,80 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Subscription Defaults
+    |--------------------------------------------------------------------------
+    |
+    | This option defines the default subscription service config
+    | for your application. You should define your subscription
+    | provider of choice along with your preferred merchant.
+    |
+    */
+    'defaults' => [
+        'provider' => 'payavel',
+        'merchant' => '',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Subscription Test Mode
+    |--------------------------------------------------------------------------
+    |
+    | When set to true, the provider & merchant will be shared with the fake subscription
+    | request so you can mock your responses as you wish. This is very useful for
+    | local & testing environments where a sandbox is limited or non-existent.
+    |
+    */
+    'test_mode' => env('SUBSCRIPTION_TEST_MODE', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Subscription Testing
+    |--------------------------------------------------------------------------
+    |
+    | This option allows you to define the location of the fake subscription
+    | request & response classes you would like to leverage when test_mode
+    | is set to true. Also, feel free to add any other settings here.
+    |
+    */
+    'testing' => [
+        'request_class' => \App\Services\Subscription\FakeSubscriptionRequest::class,
+        'response_class' => \App\Services\Subscription\FakeSubscriptionResponse::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Subscription Providers
+    |--------------------------------------------------------------------------
+    |
+    | Here you may provide the location for each subscription provider's
+    | implementation by mapping the request & response classes to it.
+    | You may also add relevant provider specific configurations.
+    |
+    */
+    'providers' => [
+
+        'payavel' => [
+            'request_class' => Payavel\Subscription\Services\Subscription\PayavelSubscriptionRequest::class,
+            'response_class' => Payavel\Subscription\Services\Subscription\PayavelSubscriptionResponse::class,
+        ],
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Subscription Merchants
+    |--------------------------------------------------------------------------
+    |
+    | This is where you should define all the merchants that will be leveraging the
+    | subscription service, along with required provider specific configurations
+    | This is the perfect place to set each merchant's api keys & secrets.
+    |
+    */
+    'merchants' => [
+
+    ],
+
+];
