@@ -30,7 +30,7 @@ class SubscriptionServiceProvider extends ServiceProvider
     protected function registerPublishableAssets()
     {
         $this->publishes([
-            __DIR__ . '/../stubs/config-publish.stub' => config_path('subscription.php'),
+            __DIR__ . '/../stubs/config.stub' => config_path('subscription.php'),
         ], 'subscription-config');
 
         $this->publishes([
