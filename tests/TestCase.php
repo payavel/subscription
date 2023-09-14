@@ -10,7 +10,9 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Schema;
 use Payavel\Serviceable\ServiceableServiceProvider;
 use Payavel\Serviceable\Tests\Traits\CreatesServiceables;
+use Payavel\Subscription\Contracts\Subscribable;
 use Payavel\Subscription\SubscriptionServiceProvider;
+use Payavel\Subscription\Traits\Subscribable as SubscribableTrait;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -64,9 +66,10 @@ class TestCase extends \Orchestra\Testbench\TestCase
     }
 }
 
-class User extends Model
+class User extends Model implements Subscribable
 {
-    use HasFactory;
+    use HasFactory,
+        SubscribableTrait;
 
     protected static function newFactory()
     {
