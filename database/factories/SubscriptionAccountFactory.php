@@ -4,13 +4,16 @@ namespace Payavel\Subscription\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Payavel\Serviceable\Models\Merchant;
+use Payavel\Serviceable\Service;
+use Payavel\Serviceable\Tests\Traits\CreatesServiceables;
 use Payavel\Serviceable\Traits\ServesConfig;
 use Payavel\Subscription\Models\SubscriptionAccount;
 use Payavel\Serviceable\Models\Provider;
 
 class SubscriptionAccountFactory extends Factory
 {
-    use ServesConfig;
+    use CreatesServiceables,
+        ServesConfig;
 
     /**
      * The name of the factory's corresponding model.
@@ -53,9 +56,7 @@ class SubscriptionAccountFactory extends Factory
                     Provider::class
                 );
 
-                $subscriptionAccount->provider_id = $provider::inRandomOrder()
-                    ->firstOr(fn () => $provider::factory()->create())
-                    ->id;
+                $subscriptionAccount->provider_id = $this->createProvider(Service::find('subscription'))->getId();
             }
 
             if (is_null($subscriptionAccount->merchant_id)) {
@@ -65,9 +66,7 @@ class SubscriptionAccountFactory extends Factory
                     Merchant::class
                 );
 
-                $subscriptionAccount->merchant_id = $merchant::inRandomOrder()
-                    ->firstOr(fn () => $merchant::factory()->create())
-                    ->id;
+                $subscriptionAccount->merchant_id = $this->createMerchant(Service::find('subscription'))->getId();
             }
         });
     }

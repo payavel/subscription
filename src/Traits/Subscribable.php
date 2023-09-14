@@ -3,11 +3,14 @@
 namespace Payavel\Subscription\Traits;
 
 use Payavel\Checkout\Models\PaymentMethod;
+use Payavel\Serviceable\Traits\ServesConfig;
 use Payavel\Subscription\Models\SubscribablePaymentMethod;
 use Payavel\Subscription\Models\SubscriptionAccount;
 
 trait Subscribable
 {
+    use ServesConfig;
+
     /**
      * Get the subscribable's account information at a provider level.
      *
@@ -15,7 +18,7 @@ trait Subscribable
      */
     public function accounts()
     {
-        return $this->morphMany(config('subscription.models.' . SubscriptionAccount::class, SubscriptionAccount::class), 'subscribable');
+        return $this->morphMany($this->config('subscription','models.' . SubscriptionAccount::class, SubscriptionAccount::class), 'subscribable');
     }
 
     /**
@@ -26,11 +29,11 @@ trait Subscribable
     public function paymentMethods()
     {
         return $this->morphToMany(
-            config('payment.models.' . PaymentMethod::class, PaymentMethod::class),
+            $this->config('checkout', 'models.' . PaymentMethod::class, PaymentMethod::class),
             'subscribable',
             'subscribable_payment_method'
         )
-            ->using(config('subscription.models.' . SubscribablePaymentMethod::class, SubscribablePaymentMethod::class))
+            ->using($this->config('subscription','models.' . SubscribablePaymentMethod::class, SubscribablePaymentMethod::class))
             ->withPivot('role');
     }
 

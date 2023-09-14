@@ -12,13 +12,6 @@ class SubscriptionPlan extends Model
         ServesConfig;
 
     /**
-     * Custom factory namespace fallback.
-     *
-     * @var string
-     */
-    protected static $factoryNamespace = 'Payavel\\Subscription\\Database\\Factories';
-
-    /**
      * The attributes that aren't mass assignable.
      *
      * @var string[]|bool
@@ -79,5 +72,15 @@ class SubscriptionPlan extends Model
     public function agreements()
     {
         return $this->hasMany(SubscriptionAgreement::class, 'plan_id');
+    }
+
+    /**
+     * Custom factory namespace fallback.
+     *
+     * @return string
+     */
+    protected static function getFactoryNamespace()
+    {
+        return 'Payavel\\Serviceable\\Database\\Factories';
     }
 }
