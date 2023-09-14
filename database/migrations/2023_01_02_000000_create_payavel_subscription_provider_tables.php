@@ -16,7 +16,7 @@ class CreatePayavelSubscriptionProviderTables extends Migration
      */
     public function up()
     {
-        if (! in_array('payavel', array_keys($this->config('subscription', 'providers')))) {
+        if (! in_array('payavel', array_keys($this->config('subscription', 'providers', [])))) {
             return;
         }
     

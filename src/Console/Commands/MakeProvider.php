@@ -12,9 +12,8 @@ class MakeProvider extends Command
      * @var string
      */
     protected $signature = 'subscription:provider
-                            {provider? : The subscription provider name}
+                            {provider? : The provider}
                             {--service=subscription}
-                            {--id= : The subscription provider identifier}
                             {--fake : Generates a gateway to be used for testing purposes}';
 
     /**
