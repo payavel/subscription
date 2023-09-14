@@ -10,13 +10,6 @@ class SubscriptionPeriod extends Model
     use HasFactory;
 
     /**
-     * Custom factory namespace fallback.
-     *
-     * @var string
-     */
-    protected static $factoryNamespace = 'Payavel\\Subscription\\Database\\Factories';
-
-    /**
      * The attributes that aren't mass assignable.
      *
      * @var string[]|bool
@@ -34,4 +27,14 @@ class SubscriptionPeriod extends Model
         'months',
         'years',
     ];
+
+    /**
+     * Custom factory namespace fallback.
+     *
+     * @return string
+     */
+    protected static function getFactoryNamespace()
+    {
+        return 'Payavel\\Serviceable\\Database\\Factories';
+    }
 }

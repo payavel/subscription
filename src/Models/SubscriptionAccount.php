@@ -14,13 +14,6 @@ class SubscriptionAccount extends Model
         ServesConfig;
 
     /**
-     * Custom factory namespace fallback.
-     *
-     * @var string
-     */
-    protected static $factoryNamespace = 'Payavel\\Subscription\\Database\\Factories';
-
-    /**
      * The attributes that aren't mass assignable.
      *
      * @var string[]|bool
@@ -91,5 +84,15 @@ class SubscriptionAccount extends Model
             ),
             'account_id'
         );
+    }
+
+    /**
+     * Custom factory namespace fallback.
+     *
+     * @return string
+     */
+    protected static function getFactoryNamespace()
+    {
+        return 'Payavel\\Subscription\\Database\\Factories';
     }
 }
